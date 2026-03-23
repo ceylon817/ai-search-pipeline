@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 검색 파이프라인 — AXZ × Upstage Solar</title>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2129;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--text3:#6e7681;--purple:#7F77DD;--purple-bg:#1a1535;--teal:#1D9E75;--teal-bg:#0a2e22;--coral:#D85A30;--coral-bg:#2a1510;--green:#3fb950;--green-bg:#0a2e14;--green2:#639922;--green2-bg:#1a2a0a;--red:#f85149;--red-bg:#2a1010;--navy:#1A2744}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:0;margin:0}
+
+/* === Tabs === */
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 24px;background:var(--bg2);position:sticky;top:0;z-index:10}
+.tab-btn{padding:14px 20px;font-size:14px;font-weight:600;color:var(--text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--purple);border-bottom-color:var(--purple)}
+.tab-content{display:none;padding:24px;max-width:800px;margin:0 auto}
+.tab-content.active{display:block}
+
+/* === Page 1: Pipeline Detail === */
+.pipe{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:16px;position:relative}
+.step-left{width:70px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-top:14px}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;position:relative;z-index:1}
+.step-line{flex:1;width:1.5px;background:var(--border);margin-top:4px}
+.step:last-child .step-line{display:none}
+.step-body{flex:1;border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:12px;background:var(--bg2)}
+.step-body:hover{border-color:var(--text3)}
+.step-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.step-title{font-weight:600;font-size:15px;color:var(--text)}
+.badge{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:600}
+.badge-solar{background:var(--purple-bg);color:var(--purple);border:1px solid #3C348966}
+.badge-axz{background:var(--teal-bg);color:var(--teal);border:1px solid #0F6E5666}
+.badge-out{background:var(--coral-bg);color:var(--coral);border:1px solid #993C1D66}
+.step-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:12px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.detail-card{background:var(--bg3);border-radius:8px;padding:10px 12px;border:1px solid var(--border)}
+.detail-card .label{font-size:11px;color:var(--text3);margin-bottom:3px}
+.detail-card .val{font-size:13px;color:var(--text);font-weight:600}
+.detail-card .sub{font-size:11px;color:var(--text2);margin-top:2px}
+.num-purple{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple)}
+.num-teal{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal)}
+.num-coral{background:var(--coral-bg);color:var(--coral);border:1px solid var(--coral)}
+.example-box{background:var(--bg2);border-radius:8px;padding:12px 16px;margin-bottom:16px;border-left:3px solid var(--text3)}
+.example-label{font-size:11px;color:var(--text3);margin-bottom:4px}
+.example-text{font-size:14px;color:var(--text);font-weight:500}
+.split-box{display:flex;gap:8px;margin-top:10px}
+.split-item{flex:1;background:var(--bg3);border-radius:8px;padding:10px 12px;border:1px solid var(--border)}
+.split-item .label{font-size:11px;color:var(--text3);margin-bottom:4px}
+.split-item .val{font-size:13px;color:var(--text);line-height:1.5}
+.full-row{grid-column:1/-1}
+.legend{display:flex;gap:16px;justify-content:center;padding:12px 0;font-size:11px;color:var(--text3)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend .dot{width:8px;height:8px;border-radius:50%}
+
+/* === Page 2: Economics === */
+.econ{display:flex;flex-direction:column;gap:16px}
+.scenario-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.scenario{border:1px solid var(--border);border-radius:12px;padding:16px 18px;background:var(--bg2)}
+.scenario.bad{border-color:#f8514966}
+.scenario.good{border-color:#3fb95066}
+.sc-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:10px}
+.sc-tag.bad{background:var(--red-bg);color:var(--red);border:1px solid #f8514944}
+.sc-tag.good{background:var(--green-bg);color:var(--green);border:1px solid #3fb95044}
+.sc-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.sc-sub{font-size:12px;color:var(--text2);margin-bottom:14px}
+.metric{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.metric:last-child{border-bottom:none}
+.metric .k{font-size:12px;color:var(--text2)}
+.metric .v{font-size:14px;font-weight:600;color:var(--text);text-align:right}
+.metric .v.red{color:var(--red)}
+.metric .v.green{color:var(--green)}
+.verdict{text-align:center;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;margin-top:12px}
+.verdict.bad{background:var(--red-bg);color:var(--red);border:1px solid #f8514933}
+.verdict.good{background:var(--green-bg);color:var(--green);border:1px solid #3fb95033}
+.bridge{background:var(--bg2);border-radius:12px;padding:16px 20px;border:1px solid var(--border)}
+.bridge-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px}
+.logic-flow{display:flex;flex-direction:column;gap:0}
+.logic-step{display:flex;align-items:stretch;gap:12px}
+.logic-connector{width:24px;display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.logic-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:14px}
+.logic-line{flex:1;width:1px;background:var(--border)}
+.logic-step:last-child .logic-line{display:none}
+.logic-content{flex:1;padding:6px 0 14px}
+.logic-label{font-size:11px;color:var(--text3)}
+.logic-text{font-size:13px;color:var(--text);font-weight:600;margin-top:1px}
+.logic-detail{font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5}
+.final-box{border:1px solid var(--border);border-radius:12px;padding:16px 20px;background:var(--bg2)}
+.final-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px}
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.final-card{background:var(--bg3);border-radius:8px;padding:10px 12px;border:1px solid var(--border)}
+.final-card .label{font-size:11px;color:var(--text3);margin-bottom:2px}
+.final-card .val{font-size:13px;font-weight:600;color:var(--text)}
+.final-card .sub{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* === Page 3: Flowchart === */
+.flowchart-wrap{display:flex;justify-content:center}
+.flowchart-wrap svg{max-width:720px;width:100%}
+.t{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;fill:#e6edf3}
+.ts{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;fill:#8b949e}
+.th{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;fill:#e6edf3;font-weight:600}
+.arr{stroke:#30363d;stroke-width:1.5}
+.c-purple>rect,.c-purple>circle{fill:#1a1535;stroke:#7F77DD;} .c-purple .th{fill:#AFA9EC} .c-purple .ts{fill:#7F77DD}
+.c-teal>rect{fill:#0a2e22;stroke:#1D9E75;} .c-teal .th{fill:#9FE1CB} .c-teal .ts{fill:#1D9E75}
+.c-coral>rect{fill:#2a1510;stroke:#D85A30;} .c-coral .th{fill:#F5C4B3} .c-coral .ts{fill:#D85A30}
+.c-green>rect{fill:#1a2a0a;stroke:#639922;} .c-green .th{fill:#C0DD97} .c-green .ts{fill:#639922}
+.c-gray>rect{fill:#161b22;stroke:#30363d;} .c-gray .th{fill:#e6edf3} .c-gray .ts{fill:#8b949e}
+.svg-badge>rect{fill:#7F77DD;stroke:#7F77DD} .svg-badge .ts{fill:#fff}
+
+/* Responsive */
+@media(max-width:640px){
+  .scenario-row{grid-template-columns:1fr}
+  .detail-grid{grid-template-columns:1fr}
+  .final-grid{grid-template-columns:1fr}
+  .tab-btn{padding:12px 14px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('pipeline')">파이프라인 상세</button>
+  <button class="tab-btn" onclick="switchTab('economics')">경제성 분석</button>
+  <button class="tab-btn" onclick="switchTab('flowchart')">구조도</button>
+</div>
+
+<!-- ============ TAB 1: Pipeline Detail ============ -->
+<div id="pipeline" class="tab-content active">
+<div class="pipe">
+<div class="example-box">
+<div class="example-label">사용자 검색 입력 (자연어)</div>
+<div class="example-text">"판교 근처 가성비 좋은 이탈리안 레스토랑 추천해줘"</div>
+</div>
+
+<div class="step">
+<div class="step-left"><div class="step-num num-purple">1</div><div class="step-line"></div></div>
+<div class="step-body">
+<div class="step-header"><span class="step-title">자연어 쿼리 이해</span><span class="badge badge-solar">Solar 호출 #1</span></div>
+<div class="step-desc">기존 키워드 매칭과 달리, Solar LLM이 문장 전체의 의도를 파악합니다. 단어가 아닌 맥락을 이해하기 때문에 "가성비 좋은"이라는 주관적 표현도 검색 신호로 전환됩니다.</div>
+<div class="detail-grid">
+<div class="detail-card"><div class="label">엔티티 추출</div><div class="val">"판교" → 위치</div><div class="sub">"이탈리안 레스토랑" → 카테고리</div></div>
+<div class="detail-card"><div class="label">의도 분류</div><div class="val">지역 검색 + 추천</div><div class="sub">비즈니스 쿼리 → 수익화 경로</div></div>
+<div class="detail-card"><div class="label">쿼리 리라이팅</div><div class="val">검색 최적화 변환</div><div class="sub">벡터/키워드 각각 최적 쿼리 생성</div></div>
+<div class="detail-card"><div class="label">라우팅 결정</div><div class="val">지역 Vertical 활성화</div><div class="sub">카카오맵 DB + 리뷰 데이터 연동</div></div>
+</div>
+</div>
+</div>
+
+<div class="step">
+<div class="step-left"><div class="step-num num-teal">2</div><div class="step-line"></div></div>
+<div class="step-body">
+<div class="step-header"><span class="step-title">하이브리드 병렬 검색</span><span class="badge badge-axz">AXZ 기존 인프라</span></div>
+<div class="step-desc">AXZ가 보유한 4대 검색 인프라가 동시에 작동합니다. 벡터 검색은 의미적 유사성을, 키워드 검색은 정확한 매칭을 담당하며, 두 결과를 결합해 단독 방식 대비 검색 적합도를 높입니다.</div>
+<div class="detail-grid">
+<div class="detail-card"><div class="label">KAVE (벡터 검색 엔진)</div><div class="val">의미 기반 시맨틱 매칭</div><div class="sub">"가성비" → 유사 맥락 리뷰 검색</div></div>
+<div class="detail-card"><div class="label">Breeze (하이브리드 검색)</div><div class="val">Lexical + Vector 통합</div><div class="sub">Elastic 대비 메모리 40% 효율</div></div>
+<div class="detail-card"><div class="label">Straw (데이터 플랫폼)</div><div class="val">약 1,000억건 문서</div><div class="sub">뉴스/카페/블로그/웹문서/이미지</div></div>
+<div class="detail-card"><div class="label">Cruise (지식 그래프)</div><div class="val">엔티티 관계 네트워크</div><div class="sub">레스토랑 → 위치/메뉴/가격대 연결</div></div>
+</div>
+<div class="split-box">
+<div class="split-item"><div class="label">Vertical DB 연동 (제휴 확장)</div><div class="val">다나와(쇼핑) · 숨고(구인구직) · 카카오맵(지역) 등 구조화된 외부 DB를 RAG 소스로 활용 → 검색 답변의 구체성과 정확도 향상</div></div>
+</div>
+</div>
+</div>
+
+<div class="step">
+<div class="step-left"><div class="step-num num-purple">3</div><div class="step-line"></div></div>
+<div class="step-body">
+<div class="step-header"><span class="step-title">AI 랭킹 & 리랭킹</span><span class="badge badge-solar">Solar 호출 #2-3</span></div>
+<div class="step-desc">병렬 검색에서 올라온 후보 문서들을 Solar가 다시 평가합니다. 단순 키워드 빈도가 아니라, 쿼리 의도와의 실질적 관련성을 기준으로 순위를 재배열합니다.</div>
+<div class="detail-grid">
+<div class="detail-card"><div class="label">Solar #2 — 관련성 스코어링</div><div class="val">Cross-encoder 리랭킹</div><div class="sub">쿼리-문서 쌍 직접 비교 평가</div></div>
+<div class="detail-card"><div class="label">Solar #3 — 컨텍스트 선별</div><div class="val">AI 오버뷰용 소스 선정</div><div class="sub">환각 방지를 위한 근거 문서 필터</div></div>
+</div>
+</div>
+</div>
+
+<div class="step">
+<div class="step-left"><div class="step-num num-purple">4</div><div class="step-line"></div></div>
+<div class="step-body">
+<div class="step-header"><span class="step-title">AI 오버뷰 답변 생성</span><span class="badge badge-solar">Solar 호출 #4</span></div>
+<div class="step-desc">검증된 소스 문서를 바탕으로 Solar가 요약 답변을 생성합니다. 링크를 나열하는 것이 아니라, 사용자의 질문에 직접 답하는 형태입니다. 출처를 명시하여 신뢰성을 확보합니다.</div>
+<div class="detail-grid">
+<div class="detail-card full-row"><div class="label">RAG (Retrieval-Augmented Generation) 답변</div><div class="val">"판교역 근처 가성비 이탈리안으로는 ○○○(1인 15,000원대, 카페 리뷰 4.3점), △△△(파스타 세트 12,000원, 블로그 추천 다수)가 있습니다. 두 곳 모두 판교역 도보 5분 이내입니다."</div><div class="sub">→ 카페 리뷰, 블로그, 카카오맵 DB에서 검증된 정보만 조합</div></div>
+</div>
+</div>
+</div>
+
+<div class="step">
+<div class="step-left"><div class="step-num num-coral">5</div></div>
+<div class="step-body">
+<div class="step-header"><span class="step-title">최종 검색결과 페이지 (SERP)</span><span class="badge badge-out">사용자 경험</span></div>
+<div class="step-desc">AI 오버뷰 요약이 상단에 노출되고, 그 아래 AI로 재랭킹된 검색결과가 표시됩니다. 기존 다음 검색 대비 세 가지가 근본적으로 달라집니다.</div>
+<div class="detail-grid">
+<div class="detail-card"><div class="label">1. 자연어 검색</div><div class="val">문장으로 질문 가능</div><div class="sub">키워드 조합이 아닌 의도 기반 검색</div></div>
+<div class="detail-card"><div class="label">2. AI 오버뷰</div><div class="val">요약 답변 즉시 제공</div><div class="sub">링크 탐색 없이 핵심 정보 전달</div></div>
+<div class="detail-card"><div class="label">3. 검색 적합도</div><div class="val">RAG 기반 정확한 결과</div><div class="sub">의미 매칭으로 관련성 높은 결과</div></div>
+<div class="detail-card"><div class="label">수익 구조</div><div class="val">Vertical 광고 연동</div><div class="sub">지역광고 · 쇼핑 CPA · 제휴 수수료</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="legend">
+<span><span class="dot" style="background:var(--purple)"></span> Upstage Solar</span>
+<span><span class="dot" style="background:var(--teal)"></span> AXZ 인프라</span>
+<span><span class="dot" style="background:var(--coral)"></span> 사용자 경험</span>
+</div>
+</div>
+
+<!-- ============ TAB 2: Economics ============ -->
+<div id="economics" class="tab-content">
+<div class="econ">
+
+<div class="scenario-row">
+<div class="scenario bad">
+<span class="sc-tag bad">외부 API 활용 시</span>
+<div class="sc-title">GPT-4o-mini 등 외부 LLM</div>
+<div class="sc-sub">쿼리당 4회 API 호출 기준</div>
+<div class="metric"><span class="k">쿼리당 검색광고 수익</span><span class="v">~10원</span></div>
+<div class="metric"><span class="k">외부 API 비용 (4회 호출)</span><span class="v red">5~8원</span></div>
+<div class="metric"><span class="k">인프라 + 기타 운영비</span><span class="v">~3원</span></div>
+<div class="metric"><span class="k">쿼리당 손익</span><span class="v red">-1~2원 적자</span></div>
+<div class="metric"><span class="k">WAU 1,300만 기준 월 손실</span><span class="v red">수십억원</span></div>
+<div class="verdict bad">AI 검색 상용화 불가 — 규모가 클수록 적자 확대</div>
+</div>
+
+<div class="scenario good">
+<span class="sc-tag good">Upstage 온프레미스 Solar</span>
+<div class="sc-title">자체 GPU 인프라 + Solar 모델</div>
+<div class="sc-sub">동일 4회 호출, 한계비용 구조</div>
+<div class="metric"><span class="k">쿼리당 검색광고 수익</span><span class="v">~10원 (→ 20~30원 목표)</span></div>
+<div class="metric"><span class="k">온프렘 추론 비용 (4회)</span><span class="v green">~1원</span></div>
+<div class="metric"><span class="k">인프라 + 기타 운영비</span><span class="v">~3원</span></div>
+<div class="metric"><span class="k">쿼리당 손익</span><span class="v green">+6원 이상</span></div>
+<div class="metric"><span class="k">Vertical DB 연동 시</span><span class="v green">+16~26원</span></div>
+<div class="verdict good">AI 검색 수익화 가능 — 규모 효과로 마진 확대</div>
+</div>
+</div>
+
+<div class="bridge">
+<div class="bridge-title">왜 업스테이지여야만 이 구조가 성립하는가</div>
+<div class="logic-flow">
+<div class="logic-step">
+<div class="logic-connector"><div class="logic-dot" style="background:var(--purple)"></div><div class="logic-line"></div></div>
+<div class="logic-content">
+<div class="logic-label">전제 조건</div>
+<div class="logic-text">AI 검색은 쿼리당 LLM을 4회 호출해야 함</div>
+<div class="logic-detail">쿼리 이해 → 하이브리드 검색 → 리랭킹 → 답변 생성. 이 중 어느 하나라도 빠지면 품질이 급락합니다.</div>
+</div>
+</div>
+<div class="logic-step">
+<div class="logic-connector"><div class="logic-dot" style="background:var(--red)"></div><div class="logic-line"></div></div>
+<div class="logic-content">
+<div class="logic-label">문제</div>
+<div class="logic-text">다음의 쿼리당 수익은 ~10원 — 외부 API 4회 호출 비용(5~8원)을 감당할 수 없음</div>
+<div class="logic-detail">네이버(HyperCLOVA X 자체 보유)나 구글(Gemini)과 달리, 다음은 자체 LLM이 없었습니다. 외부 API 의존 시 규모가 커질수록 적자가 커지는 구조.</div>
+</div>
+</div>
+<div class="logic-step">
+<div class="logic-connector"><div class="logic-dot" style="background:var(--teal)"></div><div class="logic-line"></div></div>
+<div class="logic-content">
+<div class="logic-label">해법</div>
+<div class="logic-text">업스테이지의 Solar 모델을 온프레미스로 운영 → 추론 비용 1/5~1/8 수준</div>
+<div class="logic-detail">업스테이지가 AXZ의 모회사이기 때문에 (1) 모델 라이선스 비용 없음, (2) AXZ 전용 파인튜닝 가능, (3) 한국어 검색 특화 최적화가 가능합니다. 외부 고객이 아닌 내부 시너지.</div>
+</div>
+</div>
+<div class="logic-step">
+<div class="logic-connector"><div class="logic-dot" style="background:var(--green)"></div><div class="logic-line"></div></div>
+<div class="logic-content">
+<div class="logic-label">결과</div>
+<div class="logic-text">다음이 네이버·구글과 동등한 AI 검색을 구현할 수 있는 유일한 경로</div>
+<div class="logic-detail">자체 LLM을 개발하려면 수천억 + 수년이 필요. 업스테이지 인수를 통해 즉시 활용 가능한 한국어 특화 LLM을 확보한 것이 이 딜의 핵심 시너지.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="final-box">
+<div class="final-title">다음 검색 수익 구조 변화 시나리오</div>
+<div class="final-grid">
+<div class="final-card"><div class="label">현재 (As-Is)</div><div class="val">쿼리당 ~10원</div><div class="sub">키워드 기반 SA/DA 광고</div></div>
+<div class="final-card"><div class="label">Phase 1: AI 검색 품질 강화</div><div class="val">트래픽 하락 방어</div><div class="sub">검색 QC 감소세(-29%) 반전 목표</div></div>
+<div class="final-card"><div class="label">Phase 2: Vertical DB 연동</div><div class="val">쿼리당 20~30원</div><div class="sub">다나와(쇼핑) · 카카오맵(지역광고)</div></div>
+<div class="final-card"><div class="label">Phase 3: AI 광고 모델</div><div class="val">광고 단가 추가 상승</div><div class="sub">AI 기반 맞춤형 광고 · CPA 전환</div></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ============ TAB 3: Flowchart ============ -->
+<div id="flowchart" class="tab-content">
+<div class="flowchart-wrap">
+<svg width="100%" viewBox="0 0 680 730">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#30363d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<!-- User Input -->
+<g class="c-gray">
+<rect x="90" y="26" width="500" height="48" rx="8" stroke-width="0.5"/>
+<text class="ts" x="100" y="43" dominant-baseline="central">"판교 근처 가성비 좋은 이탈리안 레스토랑 추천해줘"</text>
+<text class="th" x="580" y="57" text-anchor="end" dominant-baseline="central">자연어 입력</text>
+</g>
+
+<line x1="340" y1="74" x2="340" y2="100" class="arr" marker-end="url(#arrow)"/>
+
+<!-- Step 1: Query Understanding -->
+<g class="c-purple">
+<rect x="110" y="102" width="380" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="300" y="122" text-anchor="middle" dominant-baseline="central">쿼리 이해 &amp; 라우팅</text>
+<text class="ts" x="300" y="142" text-anchor="middle" dominant-baseline="central">의도 분류 · 엔티티 추출 · 쿼리 리라이팅</text>
+</g>
+<g class="svg-badge"><rect x="500" y="112" width="88" height="26" rx="13" stroke-width="0.5"/><text class="ts" x="544" y="125" text-anchor="middle" dominant-baseline="central" fill="#fff" font-weight="600" font-size="12">Solar #1</text></g>
+
+<line x1="300" y1="158" x2="300" y2="188" class="arr" marker-end="url(#arrow)"/>
+
+<!-- AXZ Infra Container -->
+<rect x="50" y="190" width="580" height="222" rx="16" fill="none" stroke="#1D9E75" stroke-width="0.5" stroke-dasharray="6 4"/>
+<text class="th" x="340" y="212" text-anchor="middle" dominant-baseline="central" fill="#9FE1CB">AXZ 하이브리드 검색 인프라</text>
+
+<g class="c-teal">
+<rect x="78" y="228" width="258" height="48" rx="8" stroke-width="0.5"/>
+<text class="th" x="207" y="244" text-anchor="middle" dominant-baseline="central">KAVE</text>
+<text class="ts" x="207" y="262" text-anchor="middle" dominant-baseline="central">벡터 검색 엔진 (시맨틱 매칭)</text>
+</g>
+<g class="c-teal">
+<rect x="352" y="228" width="258" height="48" rx="8" stroke-width="0.5"/>
+<text class="th" x="481" y="244" text-anchor="middle" dominant-baseline="central">Breeze</text>
+<text class="ts" x="481" y="262" text-anchor="middle" dominant-baseline="central">Lexical + Vector 통합 검색</text>
+</g>
+<g class="c-teal">
+<rect x="78" y="288" width="258" height="48" rx="8" stroke-width="0.5"/>
+<text class="th" x="207" y="304" text-anchor="middle" dominant-baseline="central">Straw</text>
+<text class="ts" x="207" y="322" text-anchor="middle" dominant-baseline="central">1,000억건 데이터 수집·저장</text>
+</g>
+<g class="c-teal">
+<rect x="352" y="288" width="258" height="48" rx="8" stroke-width="0.5"/>
+<text class="th" x="481" y="304" text-anchor="middle" dominant-baseline="central">Cruise</text>
+<text class="ts" x="481" y="322" text-anchor="middle" dominant-baseline="central">지식 그래프 (엔티티 관계)</text>
+</g>
+
+<g class="c-green">
+<rect x="78" y="350" width="532" height="44" rx="8" stroke-width="0.5"/>
+<text class="th" x="344" y="365" text-anchor="middle" dominant-baseline="central">Vertical DB 연동</text>
+<text class="ts" x="344" y="382" text-anchor="middle" dominant-baseline="central">다나와(쇼핑) · 카카오맵(지역) · 숨고(구인구직)</text>
+</g>
+
+<line x1="300" y1="412" x2="300" y2="440" class="arr" marker-end="url(#arrow)"/>
+
+<!-- Step 3: AI Ranking -->
+<g class="c-purple">
+<rect x="110" y="442" width="380" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="300" y="462" text-anchor="middle" dominant-baseline="central">AI 리랭킹 &amp; 소스 선별</text>
+<text class="ts" x="300" y="482" text-anchor="middle" dominant-baseline="central">관련성 재평가 · 오버뷰용 근거 문서 필터</text>
+</g>
+<g class="svg-badge"><rect x="500" y="452" width="104" height="26" rx="13" stroke-width="0.5"/><text class="ts" x="552" y="465" text-anchor="middle" dominant-baseline="central" fill="#fff" font-weight="600" font-size="12">Solar #2-3</text></g>
+
+<line x1="300" y1="498" x2="300" y2="526" class="arr" marker-end="url(#arrow)"/>
+
+<!-- Step 4: AI Overview -->
+<g class="c-purple">
+<rect x="110" y="528" width="380" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="300" y="548" text-anchor="middle" dominant-baseline="central">AI 오버뷰 답변 생성</text>
+<text class="ts" x="300" y="568" text-anchor="middle" dominant-baseline="central">RAG 기반 요약 답변 · 출처 인용 · 환각 방지</text>
+</g>
+<g class="svg-badge"><rect x="500" y="538" width="88" height="26" rx="13" stroke-width="0.5"/><text class="ts" x="544" y="551" text-anchor="middle" dominant-baseline="central" fill="#fff" font-weight="600" font-size="12">Solar #4</text></g>
+
+<!-- Split -->
+<line x1="300" y1="584" x2="300" y2="600" stroke="#30363d" stroke-width="0.5"/>
+<line x1="140" y1="600" x2="540" y2="600" stroke="#30363d" stroke-width="0.5"/>
+<line x1="140" y1="600" x2="140" y2="618" class="arr" marker-end="url(#arrow)"/>
+<line x1="340" y1="600" x2="340" y2="618" class="arr" marker-end="url(#arrow)"/>
+<line x1="540" y1="600" x2="540" y2="618" class="arr" marker-end="url(#arrow)"/>
+
+<!-- 3 Outcomes -->
+<g class="c-coral">
+<rect x="52" y="620" width="176" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="140" y="640" text-anchor="middle" dominant-baseline="central">자연어 검색</text>
+<text class="ts" x="140" y="660" text-anchor="middle" dominant-baseline="central">문장형 질의 가능</text>
+</g>
+<g class="c-coral">
+<rect x="252" y="620" width="176" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="340" y="640" text-anchor="middle" dominant-baseline="central">AI 오버뷰</text>
+<text class="ts" x="340" y="660" text-anchor="middle" dominant-baseline="central">요약 답변 즉시 제공</text>
+</g>
+<g class="c-coral">
+<rect x="452" y="620" width="176" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="540" y="640" text-anchor="middle" dominant-baseline="central">검색 적합도</text>
+<text class="ts" x="540" y="660" text-anchor="middle" dominant-baseline="central">RAG 기반 정확한 결과</text>
+</g>
+
+<!-- Legend -->
+<circle cx="140" cy="704" r="4" fill="#7F77DD"/>
+<text class="ts" x="150" y="704" dominant-baseline="central">Upstage Solar (4회 호출)</text>
+<circle cx="340" cy="704" r="4" fill="#1D9E75"/>
+<text class="ts" x="350" y="704" dominant-baseline="central">AXZ 기존 인프라</text>
+<circle cx="520" cy="704" r="4" fill="#D85A30"/>
+<text class="ts" x="530" y="704" dominant-baseline="central">사용자 경험</text>
+</svg>
+</div>
+</div>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
