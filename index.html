@@ -120,7 +120,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 /* === PMI Deck Preview === */
 .deck-slides{display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px 20px;background:#0D1117;max-width:none;}
 .tab-content#deck{max-width:none;}
-.slide{width:960px;height:540px;background:#FFFFFF;border-radius:4px;box-shadow:0 8px 40px rgba(0,0,0,0.5);overflow:hidden;position:relative;flex-shrink:0}
+.slide{width:960px;min-height:540px;height:auto;background:#FFFFFF;border-radius:4px;box-shadow:0 8px 40px rgba(0,0,0,0.5);overflow:visible;position:relative;flex-shrink:0;display:flex;flex-direction:column;}
 .slide-label{color:#6B7280;font-size:13px;font-weight:500;width:960px;text-align:left;margin-bottom:-30px;margin-top:10px}
 
 /* Slide Colors */
@@ -149,7 +149,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .s1 .col:nth-child(1) .col-tag{background:rgba(10,110,189,0.3);color:#60A5FA;}
 .s1 .col:nth-child(2) .col-tag{background:rgba(20,184,166,0.3);color:#5EEAD4;}
 .s1 .col:nth-child(3) .col-tag{background:rgba(245,158,11,0.3);color:#FCD34D;}
-.s1 .bottom-strip{position:absolute;bottom:0;left:0;right:0;padding:12px 48px;background:rgba(0,0,0,0.2);display:flex;justify-content:space-between;align-items:center;}
+.s1 .bottom-strip{padding:12px 48px;background:rgba(0,0,0,0.2);display:flex;justify-content:space-between;align-items:center;margin-top:auto;}
 .s1 .bottom-strip .metric{text-align:center;}
 .s1 .bottom-strip .metric-val{font-size:18px;font-weight:700;color:var(--teal);}
 .s1 .bottom-strip .metric-label{font-size:9px;color:#64748B;font-weight:500;}
@@ -234,7 +234,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .s4 .strat-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;background:rgba(20,184,166,0.2);color:var(--teal);}
 .s4 .strat-title{font-size:12px;font-weight:700;margin-bottom:3px;}
 .s4 .strat-desc{font-size:10px;color:#94A3B8;line-height:1.5;}
-.s4 .bottom-insight{position:absolute;bottom:0;left:0;right:0;background:rgba(20,184,166,0.1);padding:10px 48px;font-size:10px;color:var(--teal);font-weight:600;display:flex;align-items:center;gap:8px;}
+.s4 .bottom-insight{background:rgba(20,184,166,0.1);padding:10px 48px;font-size:10px;color:var(--teal);font-weight:600;display:flex;align-items:center;gap:8px;margin-top:auto;}
 
 /* ====== SLIDE 5: NON-BIZ QUERY - DETAIL ====== */
 .s5{background:#FFF;}
@@ -1522,6 +1522,7 @@ Solar + 구조화 DB는 실시간 DB에서 정확한 정보를 검색·요약 �
 </div>
 </div>
 </div>
+</div>
 
 <!-- Slide 4 -->
 <div class="slide-label">Slide 4 — 논비즈니스 쿼리: AI 오버뷰 (Visual)</div>
@@ -1680,6 +1681,7 @@ Solar + 구조화 DB는 실시간 DB에서 정확한 정보를 검색·요약 �
 <span style="color:var(--teal); font-weight:700;">✦ 비용 구조 우위</span><br/>
 <span style="font-size:9.5px;">Solar 온프렘으로 GPT 대비 80%+ 비용 절감 → 대규모 서비스 가능<br/>
 <span style="font-size:8.5px; color:#94A3B8;">현재 AWS 비용이 영업이익의 55% 차지 → 온프렘 전환 시 인프라 비용도 구조 개선. 온프렘 전환에 500억 투자 예정</span></span>
+</div>
 </div>
 </div>
 </div>
