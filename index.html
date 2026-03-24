@@ -3,14 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 검색 파이프라인 — AXZ × Upstage Solar</title>
+<title>AI 검색 파이프라인 × PMI 전략 — AXZ × Upstage Solar</title>
 <style>
 :root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2129;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--text3:#6e7681;--purple:#7F77DD;--purple-bg:#1a1535;--teal:#1D9E75;--teal-bg:#0a2e22;--coral:#D85A30;--coral-bg:#2a1510;--green:#3fb950;--green-bg:#0a2e14;--green2:#639922;--green2-bg:#1a2a0a;--red:#f85149;--red-bg:#2a1010;--navy:#1A2744}
 *{box-sizing:border-box;margin:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:0;margin:0}
 
+/* === Section Navigation === */
+.section-nav{display:flex;gap:0;padding:0 24px;background:var(--bg);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:20}
+.section-btn{padding:16px 24px;font-size:15px;font-weight:600;color:var(--text2);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s}
+.section-btn:hover{color:var(--text)}
+.section-btn.active{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* === Sections === */
+.section{display:none}
+.section.active{display:block}
+
 /* === Tabs === */
-.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 24px;background:var(--bg2);position:sticky;top:0;z-index:10}
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 24px;background:var(--bg2);position:sticky;top:50px;z-index:10}
 .tab-btn{padding:14px 20px;font-size:14px;font-weight:600;color:var(--text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s}
 .tab-btn:hover{color:var(--text)}
 .tab-btn.active{color:var(--purple);border-bottom-color:var(--purple)}
@@ -107,24 +117,259 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .c-gray>rect{fill:#161b22;stroke:#30363d;} .c-gray .th{fill:#e6edf3} .c-gray .ts{fill:#8b949e}
 .svg-badge>rect{fill:#7F77DD;stroke:#7F77DD} .svg-badge .ts{fill:#fff}
 
+/* === PMI Deck Preview === */
+.deck-slides{display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px 20px;background:#0D1117;max-width:none;}
+.tab-content#deck{max-width:none;}
+.slide{width:960px;height:540px;background:#FFFFFF;border-radius:4px;box-shadow:0 8px 40px rgba(0,0,0,0.5);overflow:hidden;position:relative;flex-shrink:0}
+.slide-label{color:#6B7280;font-size:13px;font-weight:500;width:960px;text-align:left;margin-bottom:-30px;margin-top:10px}
+
+/* Slide Colors */
+:root{--navy:#0F2B46;--navy-mid:#163B5C;--ocean:#0A6EBD;--teal:#14B8A6;--teal-light:#CCFBF1;--cyan:#06B6D4;--slate:#64748B;--light-bg:#F0F7FF;--light-bg2:#F8FAFC;--card-border:#E2E8F0;--text-dark:#0F172A;--text-mid:#475569;--text-light:#94A3B8;--accent-orange:#F59E0B;--accent-green:#10B981;--accent-purple:#8B5CF6;}
+
+.s1{background:var(--navy);color:#FFF;}
+.s1 .top-bar{background:linear-gradient(135deg,var(--ocean),var(--teal));height:6px;width:100%;}
+.s1 .header-area{padding:28px 48px 0;}
+.s1 .section-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+.s1 .title{font-size:26px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.s1 .subtitle{font-size:13px;color:#94A3B8;font-weight:400;}
+.s1 .three-cols{display:flex;gap:20px;padding:24px 48px 0;}
+.s1 .col{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:20px;position:relative;}
+.s1 .col::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:8px 8px 0 0;}
+.s1 .col:nth-child(1)::before{background:var(--ocean);}
+.s1 .col:nth-child(2)::before{background:var(--teal);}
+.s1 .col:nth-child(3)::before{background:var(--accent-orange);}
+.s1 .col-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:10px;}
+.s1 .col:nth-child(1) .col-icon{background:rgba(10,110,189,0.3);}
+.s1 .col:nth-child(2) .col-icon{background:rgba(20,184,166,0.3);}
+.s1 .col:nth-child(3) .col-icon{background:rgba(245,158,11,0.3);}
+.s1 .col-title{font-size:14px;font-weight:700;margin-bottom:10px;line-height:1.3;}
+.s1 .col-items{list-style:none;font-size:11px;color:#CBD5E1;line-height:1.7;}
+.s1 .col-items li::before{content:'→';margin-right:6px;opacity:0.5;}
+.s1 .col-tag{display:inline-block;font-size:9px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:10px;}
+.s1 .col:nth-child(1) .col-tag{background:rgba(10,110,189,0.3);color:#60A5FA;}
+.s1 .col:nth-child(2) .col-tag{background:rgba(20,184,166,0.3);color:#5EEAD4;}
+.s1 .col:nth-child(3) .col-tag{background:rgba(245,158,11,0.3);color:#FCD34D;}
+.s1 .bottom-strip{position:absolute;bottom:0;left:0;right:0;padding:12px 48px;background:rgba(0,0,0,0.2);display:flex;justify-content:space-between;align-items:center;}
+.s1 .bottom-strip .metric{text-align:center;}
+.s1 .bottom-strip .metric-val{font-size:18px;font-weight:700;color:var(--teal);}
+.s1 .bottom-strip .metric-label{font-size:9px;color:#64748B;font-weight:500;}
+
+/* ====== SLIDE 2: BIZ QUERY - VISUAL ====== */
+.s2{background:var(--light-bg2);}
+.s2 .left-accent{position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--ocean),var(--teal));}
+.s2 .header{padding:28px 48px 0 48px;}
+.s2 .section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--ocean);background:rgba(10,110,189,0.1);padding:3px 12px;border-radius:12px;margin-bottom:8px;}
+.s2 .title{font-size:22px;font-weight:700;color:var(--text-dark);}
+.s2 .subtitle{font-size:12px;color:var(--text-mid);margin-top:2px;}
+.s2 .content-area{display:flex;gap:24px;padding:20px 48px;}
+.s2 .flow-section{flex:1.1;}
+.s2 .flow-box{background:#FFF;border-radius:10px;padding:18px;border:1px solid var(--card-border);box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.s2 .flow-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:12px;}
+.s2 .flow-steps{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center;}
+.s2 .flow-step{background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#FFF;font-size:9.5px;font-weight:600;padding:8px 10px;border-radius:6px;text-align:center;line-height:1.3;min-width:80px;}
+.s2 .flow-arrow{color:var(--teal);font-size:16px;font-weight:700;}
+.s2 .value-highlight{background:linear-gradient(135deg,var(--ocean),var(--teal));color:#FFF;border-radius:10px;padding:14px 18px;margin-top:12px;display:flex;align-items:center;gap:16px;}
+.s2 .value-highlight .big-num{font-size:28px;font-weight:900;}
+.s2 .value-highlight .desc{font-size:11px;line-height:1.5;opacity:0.9;}
+.s2 .cards-section{flex:0.9;display:flex;flex-direction:column;gap:10px;}
+.s2 .vcard{background:#FFF;border-radius:8px;padding:14px 16px;border:1px solid var(--card-border);display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.s2 .vcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.s2 .vcard:nth-child(1) .vcard-icon{background:#DBEAFE;}
+.s2 .vcard:nth-child(2) .vcard-icon{background:#FEF3C7;}
+.s2 .vcard:nth-child(3) .vcard-icon{background:#D1FAE5;}
+.s2 .vcard:nth-child(4) .vcard-icon{background:#E9D5FF;}
+.s2 .vcard-title{font-size:12px;font-weight:700;color:var(--text-dark);margin-bottom:2px;}
+.s2 .vcard-partner{font-size:9px;color:var(--ocean);font-weight:600;margin-bottom:3px;}
+.s2 .vcard-desc{font-size:10px;color:var(--text-mid);line-height:1.5;}
+
+/* ====== SLIDE 3: BIZ QUERY - DETAIL ====== */
+.s3{background:#FFF;}
+.s3 .left-accent{position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--ocean),var(--teal));}
+.s3 .header{padding:24px 48px 0 48px;}
+.s3 .section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--ocean);background:rgba(10,110,189,0.1);padding:3px 12px;border-radius:12px;margin-bottom:8px;}
+.s3 .title{font-size:20px;font-weight:700;color:var(--text-dark);}
+.s3 .content-area{display:flex;gap:24px;padding:16px 48px;}
+.s3 .table-section{flex:1.3;}
+.s3 table{width:100%;border-collapse:collapse;font-size:10px;}
+.s3 thead th{background:var(--navy);color:#FFF;padding:8px 10px;text-align:left;font-weight:600;font-size:9.5px;}
+.s3 thead th:first-child{border-radius:6px 0 0 0;}
+.s3 thead th:last-child{border-radius:0 6px 0 0;}
+.s3 tbody td{padding:8px 10px;border-bottom:1px solid #F1F5F9;color:var(--text-dark);vertical-align:top;line-height:1.5;}
+.s3 tbody tr:hover{background:#F8FAFC;}
+.s3 .partner-tag{display:inline-block;font-size:8px;font-weight:600;background:#EFF6FF;color:var(--ocean);padding:1px 6px;border-radius:8px;}
+.s3 .chart-section{flex:0.7;}
+.s3 .chart-box{background:var(--light-bg);border-radius:10px;padding:16px;height:100%;}
+.s3 .chart-title{font-size:11px;font-weight:700;color:var(--text-dark);margin-bottom:12px;}
+.s3 .bar-chart{display:flex;flex-direction:column;gap:10px;}
+.s3 .bar-item{}
+.s3 .bar-label{font-size:9px;color:var(--text-mid);margin-bottom:3px;display:flex;justify-content:space-between;}
+.s3 .bar-track{height:22px;background:#E2E8F0;border-radius:4px;position:relative;overflow:hidden;}
+.s3 .bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:9px;font-weight:700;color:#FFF;}
+.s3 .chart-footnote{font-size:9px;color:var(--text-mid);margin-top:8px;text-align:center;}
+.s3 .insight-box{background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#FFF;border-radius:8px;padding:12px 14px;margin-top:12px;}
+.s3 .insight-box .insight-title{font-size:9px;font-weight:700;color:var(--teal);margin-bottom:4px;letter-spacing:1px;}
+.s3 .insight-box .insight-text{font-size:10px;line-height:1.6;color:#CBD5E1;}
+
+/* ====== SLIDE 4: NON-BIZ QUERY - VISUAL ====== */
+.s4{background:var(--navy);color:#FFF;}
+.s4 .top-line{height:4px;background:linear-gradient(90deg,var(--teal),var(--cyan));}
+.s4 .header{padding:24px 48px 0;}
+.s4 .section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--teal);background:rgba(20,184,166,0.15);padding:3px 12px;border-radius:12px;margin-bottom:8px;}
+.s4 .title{font-size:22px;font-weight:700;}
+.s4 .subtitle{font-size:12px;color:#94A3B8;margin-top:2px;}
+.s4 .content-area{display:flex;gap:28px;padding:20px 48px;}
+.s4 .left-col{flex:1;}
+.s4 .right-col{flex:1;}
+.s4 .mockup-area{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;height:100%;}
+.s4 .mockup-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.s4 .mockup-dot{width:8px;height:8px;border-radius:50%;}
+.s4 .mockup-searchbar{background:rgba(255,255,255,0.1);border-radius:20px;padding:8px 16px;font-size:11px;color:#94A3B8;margin-bottom:14px;border:1px solid rgba(255,255,255,0.15);}
+.s4 .ai-overview-box{background:linear-gradient(135deg,rgba(20,184,166,0.15),rgba(6,182,212,0.1));border:1px solid rgba(20,184,166,0.3);border-radius:8px;padding:14px;}
+.s4 .ai-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;color:var(--teal);background:rgba(20,184,166,0.2);padding:2px 8px;border-radius:10px;margin-bottom:8px;}
+.s4 .ai-overview-text{font-size:11px;line-height:1.7;color:#CBD5E1;}
+.s4 .ai-source{font-size:9px;color:#64748B;margin-top:8px;display:flex;gap:8px;}
+.s4 .ai-source span{background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:8px;}
+.s4 .strategy-cards{display:flex;flex-direction:column;gap:12px;}
+.s4 .strat-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;}
+.s4 .strat-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;background:rgba(20,184,166,0.2);color:var(--teal);}
+.s4 .strat-title{font-size:12px;font-weight:700;margin-bottom:3px;}
+.s4 .strat-desc{font-size:10px;color:#94A3B8;line-height:1.5;}
+.s4 .bottom-insight{position:absolute;bottom:0;left:0;right:0;background:rgba(20,184,166,0.1);padding:10px 48px;font-size:10px;color:var(--teal);font-weight:600;display:flex;align-items:center;gap:8px;}
+
+/* ====== SLIDE 5: NON-BIZ QUERY - DETAIL ====== */
+.s5{background:#FFF;}
+.s5 .top-line{height:4px;background:linear-gradient(90deg,var(--teal),var(--cyan));}
+.s5 .header{padding:22px 48px 0;}
+.s5 .section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--teal);background:rgba(20,184,166,0.1);padding:3px 12px;border-radius:12px;margin-bottom:8px;}
+.s5 .title{font-size:20px;font-weight:700;color:var(--text-dark);}
+.s5 .content-area{display:flex;gap:24px;padding:16px 48px;}
+.s5 .left-col{flex:1;}
+.s5 .right-col{flex:1;}
+.s5 .tech-flow{background:var(--light-bg);border-radius:10px;padding:16px;margin-bottom:14px;}
+.s5 .tech-flow-title{font-size:11px;font-weight:700;color:var(--text-dark);margin-bottom:10px;}
+.s5 .flow-horizontal{display:flex;align-items:center;gap:4px;justify-content:center;}
+.s5 .flow-node{background:var(--navy);color:#FFF;font-size:9px;font-weight:600;padding:8px 8px;border-radius:6px;text-align:center;min-width:72px;line-height:1.3;}
+.s5 .flow-node.highlight{background:var(--teal);}
+.s5 .flow-connector{color:var(--slate);font-size:14px;}
+.s5 .cost-compare{background:var(--light-bg);border-radius:10px;padding:16px;}
+.s5 .cost-title{font-size:11px;font-weight:700;color:var(--text-dark);margin-bottom:10px;}
+.s5 .cost-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.s5 .cost-label{font-size:10px;color:var(--text-mid);width:90px;flex-shrink:0;}
+.s5 .cost-bar-track{flex:1;height:24px;background:#E2E8F0;border-radius:4px;position:relative;overflow:hidden;}
+.s5 .cost-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:9px;font-weight:700;color:#FFF;}
+.s5 .cost-savings{text-align:center;margin-top:8px;font-size:10px;color:var(--accent-green);font-weight:700;}
+.s5 .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.s5 .metric-card{background:var(--light-bg);border-radius:8px;padding:14px;text-align:center;}
+.s5 .metric-val{font-size:22px;font-weight:800;color:var(--navy);}
+.s5 .metric-label{font-size:9px;color:var(--text-mid);margin-top:2px;}
+.s5 .competitive-box{background:var(--navy);color:#FFF;border-radius:8px;padding:14px;}
+.s5 .competitive-title{font-size:10px;font-weight:700;color:var(--teal);margin-bottom:8px;letter-spacing:1px;}
+.s5 .competitive-items{font-size:10px;line-height:1.8;color:#CBD5E1;}
+
+/* ====== SLIDE 6: CONTENT - VISUAL ====== */
+.s6{background:var(--light-bg2);}
+.s6 .left-accent{position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--accent-orange),#F97316);}
+.s6 .header{padding:24px 48px 0 48px;}
+.s6 .section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;color:#D97706;background:rgba(245,158,11,0.1);padding:3px 12px;border-radius:12px;margin-bottom:8px;}
+.s6 .title{font-size:22px;font-weight:700;color:var(--text-dark);}
+.s6 .subtitle{font-size:12px;color:var(--text-mid);margin-top:2px;}
+.s6 .pillars-area{display:flex;gap:16px;padding:18px 48px;align-items:stretch;}
+.s6 .pillar{background:#FFF;border-radius:10px;padding:18px;border:1px solid var(--card-border);box-shadow:0 2px 8px rgba(0,0,0,0.04);display:flex;flex-direction:column;}
+.s6 .pillar.main{flex:2;}
+.s6 .pillar.sub{flex:1;}
+.s6 .pillar-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:10px;align-self:flex-start;}
+.s6 .pillar.main .pillar-badge{background:#FEF3C7;color:#92400E;}
+.s6 .pillar:nth-child(2) .pillar-badge{background:#DBEAFE;color:#1E40AF;}
+.s6 .pillar:nth-child(3) .pillar-badge{background:#F3E8FF;color:#6B21A8;}
+.s6 .pillar-title{font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.3;}
+.s6 .pillar-desc{font-size:10px;color:var(--text-mid);line-height:1.6;flex:1;}
+.s6 .pillar-mockup{background:var(--light-bg);border-radius:8px;padding:12px;margin-top:10px;border:1px dashed #CBD5E1;}
+.s6 .mockup-label{font-size:8px;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.s6 .mockup-items{display:flex;gap:6px;flex-wrap:wrap;}
+.s6 .mockup-chip{font-size:9px;padding:3px 8px;border-radius:12px;font-weight:500;}
+.s6 .pillar.main .mockup-chip{background:#FEF3C7;color:#92400E;}
+.s6 .pillar:nth-child(2) .mockup-chip{background:#DBEAFE;color:#1E40AF;}
+.s6 .pillar:nth-child(3) .mockup-chip{background:#F3E8FF;color:#6B21A8;}
+.s6 .pillar-features{list-style:none;font-size:10px;color:var(--text-mid);line-height:1.7;margin-top:8px;}
+.s6 .pillar-features li::before{content:'✦';margin-right:6px;font-size:8px;}
+
+/* ====== SLIDE 7: CONTENT - DETAIL ====== */
+.s7{background:#FFF;}
+.s7 .left-accent{position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--accent-orange),#F97316);}
+.s7 .header{padding:22px 48px 0 48px;}
+.s7 .section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;color:#D97706;background:rgba(245,158,11,0.1);padding:3px 12px;border-radius:12px;margin-bottom:8px;}
+.s7 .title{font-size:20px;font-weight:700;color:var(--text-dark);}
+.s7 .content-area{padding:14px 48px;}
+.s7 .detail-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px;}
+.s7 .detail-card{border:1px solid var(--card-border);border-radius:10px;overflow:hidden;}
+.s7 .detail-card-header{padding:10px 14px;font-size:11px;font-weight:700;color:#FFF;}
+.s7 .detail-card:nth-child(1) .detail-card-header{background:var(--accent-orange);}
+.s7 .detail-card:nth-child(2) .detail-card-header{background:var(--ocean);}
+.s7 .detail-card:nth-child(3) .detail-card-header{background:var(--accent-purple);}
+.s7 .detail-card-body{padding:12px 14px;}
+.s7 .detail-row{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid #F8FAFC;font-size:10px;}
+.s7 .detail-row:last-child{border-bottom:none;}
+.s7 .detail-key{color:var(--text-mid);}
+.s7 .detail-val{color:var(--text-dark);font-weight:600;text-align:right;}
+.s7 .timeline-section{margin-top:14px;}
+.s7 .timeline-title{font-size:11px;font-weight:700;color:var(--text-dark);margin-bottom:10px;}
+.s7 .timeline{display:flex;align-items:flex-start;gap:0;position:relative;}
+.s7 .timeline::before{content:'';position:absolute;top:14px;left:20px;right:20px;height:3px;background:#E2E8F0;border-radius:2px;}
+.s7 .tl-item{flex:1;text-align:center;position:relative;}
+.s7 .tl-dot{width:28px;height:28px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#FFF;position:relative;z-index:1;}
+.s7 .tl-item:nth-child(1) .tl-dot{background:#F59E0B;}
+.s7 .tl-item:nth-child(2) .tl-dot{background:var(--ocean);}
+.s7 .tl-item:nth-child(3) .tl-dot{background:var(--teal);}
+.s7 .tl-item:nth-child(4) .tl-dot{background:var(--accent-green);}
+.s7 .tl-period{font-size:9px;font-weight:700;color:var(--text-dark);margin-bottom:2px;}
+.s7 .tl-desc{font-size:8.5px;color:var(--text-mid);line-height:1.4;}
+
+/* === Skeleton Tab === */
+.skeleton-content{font-size:14px;line-height:1.8;color:var(--text);max-width:900px;margin:0 auto;}
+.skeleton-content h1{font-size:24px;font-weight:700;color:var(--text);margin-top:24px;margin-bottom:16px;}
+.skeleton-content h2{font-size:20px;font-weight:700;color:var(--teal);margin-top:20px;margin-bottom:12px;}
+.skeleton-content h3{font-size:16px;font-weight:600;color:var(--text);margin-top:16px;margin-bottom:10px;}
+.skeleton-content p{margin-bottom:14px;color:var(--text2);}
+.skeleton-content ul{margin-left:24px;margin-bottom:14px;}
+.skeleton-content li{margin-bottom:8px;color:var(--text2);}
+.skeleton-content table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--bg2);border-radius:8px;overflow:hidden;}
+.skeleton-content table th{background:var(--bg3);color:var(--text);padding:12px;text-align:left;font-weight:600;border-bottom:1px solid var(--border);}
+.skeleton-content table td{padding:12px;border-bottom:1px solid var(--border);color:var(--text2);}
+.skeleton-content table tr:last-child td{border-bottom:none;}
+.skeleton-content blockquote{border-left:3px solid var(--teal);padding-left:16px;margin:16px 0;color:var(--text2);font-style:italic;}
+.skeleton-content code{background:var(--bg3);color:var(--text);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;}
+.skeleton-content pre{background:var(--bg3);color:var(--text);padding:16px;border-radius:8px;overflow-x:auto;margin:16px 0;font-family:monospace;font-size:12px;}
+
 /* Responsive */
 @media(max-width:640px){
   .scenario-row{grid-template-columns:1fr}
   .detail-grid{grid-template-columns:1fr}
   .final-grid{grid-template-columns:1fr}
   .tab-btn{padding:12px 14px;font-size:13px}
+  .section-btn{padding:14px 16px;font-size:13px}
+  .slide{width:100%;max-width:960px;}
+  .s1 .three-cols{flex-direction:column;}
+  .s1 .metrics{grid-template-columns:repeat(2,1fr);}
 }
 </style>
 </head>
 <body>
 
+<!-- ============ SECTION NAVIGATION ============ -->
+<div class="section-nav">
+  <button class="section-btn active" onclick="switchSection('ai-search')">AI Search Pipeline</button>
+  <button class="section-btn" onclick="switchSection('pmi')">IM-PMI Ideation</button>
+</div>
+
+<!-- ============ SECTION 1: AI SEARCH PIPELINE ============ -->
+<div id="ai-search" class="section active">
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('pipeline')">파이프라인 상세</button>
   <button class="tab-btn" onclick="switchTab('economics')">경제성 분석</button>
   <button class="tab-btn" onclick="switchTab('flowchart')">구조도</button>
 </div>
 
-<!-- ============ TAB 1: Pipeline Detail ============ -->
+<!-- TAB 1: Pipeline Detail -->
 <div id="pipeline" class="tab-content active">
 <div class="pipe">
 <div class="example-box">
@@ -208,7 +453,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 </div>
 
-<!-- ============ TAB 2: Economics ============ -->
+<!-- TAB 2: Economics -->
 <div id="economics" class="tab-content">
 <div class="econ">
 
@@ -289,7 +534,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 </div>
 
-<!-- ============ TAB 3: Flowchart ============ -->
+<!-- TAB 3: Flowchart -->
 <div id="flowchart" class="tab-content">
 <div class="flowchart-wrap">
 <svg width="100%" viewBox="0 0 680 730">
@@ -402,10 +647,1211 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </div>
 </div>
 
+</div>
+
+<!-- ============ SECTION 2: IM-PMI IDEATION ============ -->
+<div id="pmi" class="section">
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('skeleton')">Skeleton</button>
+  <button class="tab-btn" onclick="switchTab('deck')">Deck Preview</button>
+</div>
+
+<!-- TAB 1: Skeleton -->
+<div id="skeleton" class="tab-content active">
+<div class="skeleton-content">
+<h1>PMI 섹션 7장 스켈레톤 (v2 — 장표 작업용 최종)</h1>
+
+<blockquote>
+<p>이 문서는 인턴이 이 텍스트만 보고 바로 장표 작업할 수 있도록 설계됨. 각 슬라이드별로 [레이아웃], [텍스트 내용], [비주얼 요소], [데이터 소스] 구분.</p>
+</blockquote>
+
+<hr/>
+
+<h2>Slide 1 — PMI 장기 전략 Overview</h2>
+
+<h3>목적</h3>
+<p>LP에게 "AXZ를 인수한 뒤 뭘 할 것인가"를 3대 축으로 한눈에 보여주는 개괄 장표. 3개 축이 왜 이 3개인지의 논리 구조(수익화 → 트래픽 → 생태계)를 자연스럽게 전달.</p>
+
+<h3>레이아웃</h3>
+<ul>
+<li>상단 20%: 섹션 타이틀 + 한줄 메시지</li>
+<li>중앙 55%: 3-column 카드 (각 축)</li>
+<li>하단 25%: 핵심 지표 4개 (아이콘한 큰 숫자)</li>
+</ul>
+
+<h3>텍스트 내용</h3>
+
+<p><strong>섹션 라벨</strong>: POST-MERGER INTEGRATION<br/>
+<strong>타이틀</strong>: AXZ 장기 PMI 전략: 3대 축 기반 가치 창출<br/>
+<strong>서브타이틀</strong>: Upstage Solar 모델 시너지를 활용한 검색 포털의 AI 전환 및 수익 구조 고도화</p>
+
+<p><strong>Column 1 — 비즈니스 쿼리 수익화</strong></p>
+<ul>
+<li>Solar 기반 AI 검색 강화 → SA 클릭률/전환율 극대화</li>
+<li>외부 구조화 DB 연동 → QC당 SA 매출 2~3배 향상 (~10원 → 20~30원, SA CTR 2.6%→5~8% 향상이 핵심)</li>
+<li>쇼핑·자동차·지역검색·구인구직 등 버티컬 확대</li>
+<li>개인화·타게팅 광고 노출 고도화</li>
+<li>태그: <strong>수익 직결 — 최우선 과제</strong></li>
+</ul>
+
+<p><strong>Column 2 — 논비즈니스 쿼리 트래픽 확보</strong></p>
+<ul>
+<li>AI Overview로 검색 품질 차별화 (네이버 CUE: 서비스 '26.4.9 종료 시점 선제 진입)</li>
+<li>직접 수익보다 사용자 유입 및 검색 습관 형성이 목적</li>
+<li>Solar 온프렘 모델로 대규모 트래픽 대응 가능한 비용 구조 확보</li>
+<li>검색 품질 개선 → 비즈니스 쿼리 유입 증가의 선순환</li>
+<li>태그: <strong>트래픽 — 장기 성장 기반</strong></li>
+</ul>
+
+<p><strong>Column 3 — 콘텐츠 생태계 강화</strong></p>
+<ul>
+<li>AI 큐레이션 기반 개인화 메인 페이지 (Google Discover 벤치마크)</li>
+<li>다음 메일 연동 소셜 캘린더 서비스 (타임트리 벤치마크, 글로벌 5,500만 유저)</li>
+<li>뉴스·금융 등 에이전트형 정보 전달 서비스</li>
+<li>태그: <strong>생태계 — 유저 Lock-in</strong></li>
+</ul>
+
+<p><strong>하단 지표 4개</strong> (큰 숫자 + 작은 라벨):</p>
+<table>
+<tr><th>지표</th><th>값</th><th>소스</th></tr>
+<tr><td>WAU</td><td>MO 740만 + PC 540만</td><td>FDD ('25.12)</td></tr>
+<tr><td>색인 문서</td><td>1,000억+</td><td>CDD</td></tr>
+<tr><td>SA 연매출</td><td>571억원 ('26P)</td><td>FDD Plan</td></tr>
+<tr><td>AI 엔진</td><td>Solar Pro3 (102B params)</td><td>업스테이지 공식 ('26.1)</td></tr>
+</table>
+
+<h3>비주얼 요소</h3>
+<ul>
+<li>각 column 상단에 컬러 액센트 바 (1: 블루, 2: 틸, 3: 오렌지)</li>
+<li>각 column에 아이콘 (💰, 🔍, 📱) 또는 미니멀 아이콘</li>
+<li>하단은 다크 배경 스트립에 밝은 숫자</li>
+</ul>
+
+<h3>주의사항</h3>
+<ul>
+<li>여기서는 디테일 X. 각 축이 "뭔지"만 보여주고 "어떻게"는 이후 페이지에서.</li>
+<li>"쿼리당 10원→30원"은 여기서는 "2~3배 향상"으로만 언급, 구체 숫자는 Slide 3에서.</li>
+</ul>
+
+<hr/>
+
+<h2>Slide 2 — 비즈니스 쿼리: 수익화 전략 (Visual)</h2>
+
+<h3>목적</h3>
+<p>비즈니스 쿼리 강화가 구체적으로 뭔지를 시각적으로 보여주는 장표. "어떤 파트너와, 어떤 정보를 더 줌으로써 클릭률을 높일지"가 핵심 메시지.</p>
+
+<h3>레이아웃</h3>
+<ul>
+<li>좌측 55%: SA 수익 극대화 로직 플로우 + 수익 모델 3가지 + 쿼리당 매출 향상 콜아웃</li>
+<li>우측 45%: 버티컬별 파트너 카드 3~4개 (이미지 기반)</li>
+</ul>
+
+<h3>텍스트 내용</h3>
+
+<p><strong>섹션 태그</strong>: BUSINESS QUERY<br/>
+<strong>타이틀</strong>: 비즈니스 쿼리 수익화 전략<br/>
+<strong>서브타이틀</strong>: Solar AI 검색 강화 + 외부 구조화 DB 연동을 통한 쿼리당 매출 극대화</p>
+
+<p><strong>좌측 — SA 수익 극대화 Value Chain (플로우 다이어그램)</strong>:</p>
+<pre>Solar LLM 검색 품질 강화 → 하이브리드 검색 (벡터+키워드) → 개인화 광고 타게팅 → 클릭률/전환율 극대화</pre>
+
+<ul>
+<li>설명 보충: Upstage Solar Pro3 (102B 파라미터) 기반 검색 랭킹 모델이 쿼리 의도를 더 정확히 파악 → 관련성 높은 SA 광고 노출 → 클릭률 상승</li>
+<li>현재 SA는 네이버 Adpost 파워링크 중심 (SA의 93.2%, '26.1월 FDD 기준). Solar가 검색 품질을 높이면 광고 관련성도 자연 상승</li>
+</ul>
+
+<p><strong>좌측 — 쿼리당 매출 향상 콜아웃 (강조 박스)</strong>:</p>
+<pre>QC당 SA 매출: ~10원 → 20~30원 (2~3배)</pre>
+
+<blockquote>
+<p><strong>⚠️ 장표 작업 시 "QC당 매출"과 "CPC(클릭당 단가)" 혼동 주의 — 반드시 아래 주석 포함</strong></p>
+<table>
+<tr><th>개념</th><th>정의</th><th>현재 수치</th><th>소스</th></tr>
+<tr><td><strong>QC당 SA 매출</strong></td><td>SA 연매출 ÷ 연간 총 검색 QC. 검색 1회당 평균적으로 발생하는 SA 수익. 대부분의 쿼리는 광고 클릭 없이 지나감</td><td><strong>~10원</strong></td><td>570억 ÷ 55.6억QC (일 1,524만×365)</td></tr>
+<tr><td><strong>CPC (클릭당 단가)</strong></td><td>실제로 광고가 클릭되었을 때 발생하는 단가. 상품별 상이</td><td><strong>ASP 390원</strong> ('25 4Q)</td><td>FDD: 파워링크 486원, 파워쇼핑 283원, 파워플레이스 288원, 카카오 263원</td></tr>
+<tr><td><strong>SA CTR (클릭률)</strong></td><td>검색 쿼리 중 실제 SA 광고를 클릭하는 비율</td><td><strong>~2.6%</strong></td><td>역산: 10원 ÷ 390원 ≒ 2.6%</td></tr>
+</table>
+
+<p><strong>"10원→30원"의 의미</strong>: CPC를 올리겠다는 게 아니라 <strong>QC당 매출을 2~3배</strong>로 올리겠다는 것. 이건 두 가지 경로로 달성 가능:</p>
+<ol>
+<li><strong>CTR 향상</strong> (2.6% → 5~8%): 구조화 DB 연동으로 가격비교·스펙·견적 등 리치 정보가 검색 결과에 바로 노출 → 텍스트만 있는 SA보다 클릭 확률 훨씬 높아짐</li>
+<li><strong>비즈니스 쿼리 비중 확대</strong>: 현재 분모에 논비즈 쿼리(날씨, 뉴스 등 수익 無)도 전부 포함. 쇼핑·자동차·지역검색 등 상업 의도 쿼리 비중이 늘면 QC당 평균 매출 자연 상승</li>
+</ol>
+
+<p><strong>장표 표기 권장</strong>: "QC당 SA 매출 ~10원 → 20~30원" + 하단 주석 "※ 검색 1회당 평균 SA 수익. 실제 CPC(클릭당 단가)는 ASP 390원 수준"</p>
+</blockquote>
+
+<ul>
+<li>산출 근거:
+<ul>
+<li>SA 연매출 ~570억 ('26P) ÷ 연간 QC ~55.6억회 (일 1,524만 × 365일, FDD '25.12 기준) ≒ QC당 ~10.3원</li>
+<li>외부 구조화 DB 연동 시 검색 결과에 가격비교·스펙·견적 등 직접 정보 노출 → CTR 상승이 핵심 드라이버</li>
+<li>구조화 DB + Solar RAG는 범용 LLM(GPT, Gemini)의 할루시네이션 리스크 없이 정확한 답변 제공 가능</li>
+<li>예: "갤럭시 S26 Ultra 배터리 용량" → DB에서 정확한 스펙 반환 (회의록 이건수 대표 언급)</li>
+<li>LP 설득 포인트: CTR 2.6%→5~8% 향상은 비현실적 목표가 아님. 네이버 파워쇼핑(리치 정보 포함) 대 일반 파워링크(텍스트)의 CTR 차이가 이미 유사한 배수 차이를 보여줌</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>좌측 — 수익 모델 3가지 (작은 박스 3개)</strong>:</p>
+<ol>
+<li><strong>SA 강화</strong>: 검색광고 클릭률 최적화 (ASP 390원→상승 목표)</li>
+<li><strong>DA 전환</strong>: SSP 교체를 통한 DA 지면 최적화 (현 SSP 비효율 존재, 단기 실행과제)</li>
+<li><strong>B2B API</strong>: Upstage와 패키지로 제휴사(숨고, 다나와 등)에 AI 검색 엔진 제공 — 원가+10% 마크업 3자 계약 구조</li>
+</ol>
+
+<p><strong>우측 — 버티컬 파트너 카드</strong> (각 카드에 아이콘 + 파트너명 + 연동 DB + 클릭률 개선 로직):</p>
+
+<p><strong>카드 1: 🛒 쇼핑 검색</strong></p>
+<ul>
+<li>파트너: 다나와 (커넥트웨이브, MBK파트너스 소유)</li>
+<li>연동 DB: 상품 DB — 가격비교, 스펙, 리뷰, 실시간 최저가</li>
+<li>클릭률 개선 로직: 검색 결과에 가격비교 정보가 바로 노출되면, 단순 텍스트 SA 대비 클릭률 2~3배 → QC당 매출 향상</li>
+<li>참고: 다음-다나와는 2006년 전략적 제휴 이력 있음 (카카오 시절). 현재 쇼핑하우 카탈로그 연동 중이나 별도 대가 미수취 상태 → 적정대가 수취 시 월 15~28억 추정 (FDD: CPC 기준 28억, CPM 기준 15억)</li>
+<li>우선순위: ★★★ 최우선 (이건수 대표 언급, 단기 실행과제)</li>
+</ul>
+
+<p><strong>카드 2: 🚗 자동차 검색</strong></p>
+<ul>
+<li>파트너: 다나와 자동차 (커넥트웨이브 내) / <strong>M&A 검토 중</strong></li>
+<li>연동 DB: 신차 견적, TCO(총소유비용) 비교, 중고차 시세</li>
+<li>클릭률 개선 로직: 자동차 검색 시 견적 비교·TCO 계산 결과 직접 노출 → 딜러/보험 광고 연결</li>
+<li>M&A 디테일: 연매출 ~30억, MBK파트너스 소유, 100억대 인수 가능성, 2년 회수 예상 (이건수 대표 미팅)</li>
+<li>참고: 중고차까지 확장 가능 — 검색 품질 개선 효과 큼</li>
+</ul>
+
+<p><strong>카드 3: 📍 지역 검색</strong></p>
+<ul>
+<li>파트너/인프라: 카카오맵 연동 (다음 검색 결과에 카카오맵 지면 활용)</li>
+<li>수익 모델: 네이버식 지역광고 도입 — 파워플레이스(네이버: 업체 정보 노출 + CPC) 벤치마크</li>
+<li>⚠️ 중요 팩트: 카카오맵 자체 로컬광고는 2022.10 종료됨. 우리가 하려는 건 다음 검색 결과 내 카카오맵 POI 지면에 네이버 파워플레이스 같은 CPC 지역광고를 <strong>새로 도입</strong>하는 것</li>
+<li>규모감: 네이버 지역광고 대비 1/10 규모에서 시작, 연 400억 목표 (FINAL_COMM)</li>
+<li>참고: FDD 기준 네이버 파워플레이스 CPC 단가 ~288원 ('25 4Q), AXZ 검색 결과에서도 유사 수준 기대</li>
+</ul>
+
+<p><strong>카드 4 (작게): 🤝 구인구직·전문가 매칭</strong></p>
+<ul>
+<li>파트너: 숨고 (생활서비스 매칭, 인테리어·청소·레슨 등) / 알바몬 (아르바이트 1위) / 크몽 (전문가 프리랜서, 누적 449만 회원, 2025 영업이익 43억으로 617% 급증)</li>
+<li>전략 로직: 네이버 검색 결과에서 구인구직 영역 품질이 낮음 (이건수 대표 언급) → 다음이 구조화 DB로 먼저 선점 가능한 니치</li>
+<li>CPC + 리드 수수료 모델</li>
+</ul>
+
+<p><strong>📸 이미지 요청 사항</strong>: 윤주희 매니저님에게 아래 3가지 검색결과 화면 캡처/목업 요청 필요</p>
+<ol>
+<li>쇼핑 검색 결과 (다나와 DB 연동된 형태)</li>
+<li>자동차 검색 결과 (견적 비교 UI)</li>
+<li>지역검색 결과 (파워플레이스형 업체 광고 노출)</li>
+</ol>
+<p>→ 이미지 받으면 우측 카드 영역에 실제 스크린샷으로 교체</p>
+
+<hr/>
+
+<h2>Slide 3 — 비즈니스 쿼리: 상세 분석 (Data)</h2>
+
+<h3>목적</h3>
+<p>LP가 "숫자로 보여줘"라고 할 때 대비하는 핵심 장표. "쿼리당 10원→30원" upside 스토리를 테이블+차트로 입증.</p>
+
+<h3>레이아웃</h3>
+<ul>
+<li>좌측 60%: 버티컬별 상세 테이블 + Key Insight 박스</li>
+<li>우측 40%: 쿼리당 매출 바 차트 + SA 매출 구성 차트</li>
+</ul>
+
+<h3>텍스트 내용</h3>
+
+<p><strong>섹션 태그</strong>: BUSINESS QUERY<br/>
+<strong>타이틀</strong>: 비즈니스 쿼리: 버티컬별 수익화 상세 전략</p>
+
+<p><strong>좌측 — 버티컬별 상세 테이블</strong>:</p>
+
+<table>
+<tr><th>버티컬</th><th>제휴 파트너</th><th>연동 DB / 서비스</th><th>수익 모델</th><th>기대 효과</th></tr>
+<tr><td><strong>쇼핑</strong></td><td>다나와 (커넥트웨이브)</td><td>상품 DB: 가격비교, 스펙, 리뷰, 최저가. 현재 쇼핑하우 카탈로그 연동 중이나 대가 미수취</td><td>CPC 광고 수수료 (네이버 파워쇼핑 벤치마크, CPC ~283원 '25 4Q FDD)</td><td>쇼핑하우 적정대가 수취 시 <strong>월 15~28억 추정</strong> (FDD). QC당 매출 10→25~30원</td></tr>
+<tr><td><strong>자동차</strong></td><td>다나와 자동차 <strong>(M&A 검토)</strong></td><td>신차 견적, TCO 비교, 중고차 시세. 충실한 DB 보유</td><td>광고 수수료 + DB 활용 라이선스</td><td>연매출 ~30억 서비스, <strong>100억대 인수, 2년 회수</strong> 예상</td></tr>
+<tr><td><strong>지역검색</strong></td><td>카카오맵 지면 활용</td><td>POI 정보, 지역업체 DB. 네이버 파워플레이스 모델 벤치마크</td><td>CPC 지역광고 (카카오맵 로컬광고 2022 종료 → 새로 도입)</td><td>네이버 1/10 규모 시작, <strong>연 400억 목표</strong></td></tr>
+<tr><td><strong>구인구직</strong></td><td>숨고·알바몬·크몽</td><td>전문가 매칭, 구인 DB. 프리랜서 플랫폼 시장 2025년 거래액 YoY +23% 성장</td><td>CPC + 리드 수수료</td><td>네이버 검색 품질 낮은 니치 선점</td></tr>
+</table>
+
+<p><strong>좌측 — Key Insight 박스</strong> (다크 배경):</p>
+<pre>구조화 DB + Solar RAG의 핵심 차별화:
+범용 LLM(GPT, Gemini)은 학습 데이터 기반으로 답변 → 할루시네이션 리스크
+Solar + 구조화 DB는 실시간 DB에서 정확한 정보를 검색·요약 → 팩트 기반 답변
+→ 예: "갤럭시 S26 Ultra 카메라 스펙" 쿼리 시 DB에서 정확한 사양 반환
+→ LP 관점: AI 검색이 '더 정확하다'는 건 광고 클릭률 향상으로 직결</pre>
+
+<p><strong>우측 — 차트 1: QC당 SA 매출 변화 전망 (수평 바 차트)</strong>:</p>
+
+<blockquote>
+<p>※ 차트 제목을 반드시 "QC당 SA 매출"로 표기. "쿼리당 단가"라고 쓰면 CPC(390원)와 혼동.<br/>
+※ 차트 하단 주석: "QC당 SA 매출 = SA 연매출 ÷ 연간 총 검색 QC. 현재 SA CTR ~2.6%, CTR 향상이 핵심 드라이버"</p>
+</blockquote>
+
+<table>
+<tr><th>상태</th><th>QC당 SA 매출</th><th>암묵적 CTR</th><th>바 길이</th><th>산출 근거</th></tr>
+<tr><td>현재 (텍스트 SA 중심)</td><td>~10원</td><td>~2.6%</td><td>33%</td><td>570억÷55.6억QC</td></tr>
+<tr><td>DB 연동 후 (쇼핑 우선)</td><td>~25원</td><td>~6.4%</td><td>83%</td><td>CTR 2.5배 향상 가정</td></tr>
+<tr><td>풀 버티컬 확장 (목표)</td><td>~30원</td><td>~7.7%</td><td>100%</td><td>CTR 3배 향상 가정</td></tr>
+</table>
+
+<ul>
+<li>산출 근거:
+<ul>
+<li>현재 QC당 ~10원: SA 연 ~570억 ÷ 검색 QC 연 ~55.6억회(일 1,524만 × 365) ≒ 10.3원</li>
+<li>현재 SA CTR ~2.6%: QC당 매출 10원 ÷ CPC ASP 390원 ≒ 2.6%</li>
+<li>목표 QC당 ~30원은 CTR ~7.7% 필요: 구조화 DB 연동으로 리치 정보(가격비교·스펙·견적) 노출 시 CTR 2~3배 향상 가정</li>
+<li>참고: 네이버 파워쇼핑(리치 포맷) 대 일반 파워링크(텍스트)의 CTR 차이가 유사 배수 → 비현실적 목표 아님</li>
+<li>이건수 대표 미팅 기반 추정치이며, 구체적 근거 정밀화 필요 (IM 공개 전 확인 사항)</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>우측 — 차트 2: SA 매출 플랫폼별 구성 ('25 4Q 분기 기준, FDD)</strong>:</p>
+<table>
+<tr><th>플랫폼</th><th>분기 매출</th><th>비중</th></tr>
+<tr><td>네이버 파워링크</td><td>101.3억</td><td>70.3%</td></tr>
+<tr><td>네이버 파워쇼핑</td><td>23.8억</td><td>16.5%</td></tr>
+<tr><td>네이버 파워플레이스</td><td>3.5억</td><td>2.4%</td></tr>
+<tr><td>카카오</td><td>9.1억</td><td>6.3%</td></tr>
+<tr><td>구글</td><td>6.4억</td><td>4.4%</td></tr>
+<tr><td>계</td><td>144.0억</td><td>100%</td></tr>
+</table>
+
+<ul>
+<li>메시지: 네이버향 SA가 89.2%로 절대적. 자체 버티컬 DB 확보로 네이버 의존도 낮추면서 QC당 단가도 올리는 전략</li>
+</ul>
+
+<h3>데이터 소스</h3>
+<ul>
+<li>SA 매출 분기별: FDD Final Report (p.3227~3265 참조)</li>
+<li>쇼핑하우 적정대가: FDD (p.1775~1830)</li>
+<li>QC당 매출 추정: 이건수 대표 미팅록 + FDD QC 데이터</li>
+<li>지역광고 400억 목표: FINAL_COMM</li>
+</ul>
+
+<hr/>
+
+<h2>Slide 4 — 논비즈니스 쿼리: AI Overview (Visual)</h2>
+
+<h3>목적</h3>
+<p>AI Overview가 뭔지 직관적으로 보여주는 장표. "돈이 바로 되는 건 아니지만 트래픽을 가져오는 것" — 이건수 대표 미팅 핵심 메시지.</p>
+
+<h3>레이아웃</h3>
+<ul>
+<li>좌측 50%: 다음 AI Overview 검색 화면 목업</li>
+<li>우측 50%: 전략 카드 3개</li>
+</ul>
+
+<h3>텍스트 내용</h3>
+
+<p><strong>섹션 태그</strong>: NON-BUSINESS QUERY<br/>
+<strong>타이틀</strong>: AI Overview: 검색 품질 차별화를 통한 트래픽 확보<br/>
+<strong>서브타이틀</strong>: 직접 수익보다 사용자 습관 형성과 장기 트래픽 유입이 핵심 목적</p>
+
+<p><strong>좌측 — AI Overview 목업</strong>:</p>
+<ul>
+<li>브라우저 프레임 (daum.net)</li>
+<li>검색바: "2026년 부동산 전망과 금리 영향은?" (15자 이상 롱테일 쿼리 예시)</li>
+<li>AI Overview 답변 영역:
+<ul>
+<li>배지: ✨ AI Overview · Powered by Solar</li>
+<li>답변 텍스트: "2026년 부동산 시장은 기준금리 인하 기조와 함께 수도권 중심으로 회복세를 보이고 있습니다. 한국은행의 3월 금리 동결에도 하반기 추가 인하 기대감이 유지되며..."</li>
+<li>출처 태그: 📰 한국경제 / 📊 한국은행 보고서 / 🏠 부동산114</li>
+<li>관련 검색어: "2026 서울 아파트 전망" / "금리 인하 시기" / "부동산 투자 전략"</li>
+<li>⚠️ 이건 목업임. 실제 서비스 스크린샷 확보되면 교체 필요.</li>
+</ul>
+</li>
+</ul>
+
+<p><strong>우측 — 전략 카드 3개</strong>:</p>
+
+<p><strong>카드 1: 네이버 CUE: 종료 시점 선점</strong></p>
+<ul>
+<li>네이버 CUE: (큐:) = 네이버의 생성형 AI 검색 서비스 (2023.9 비공개 베타 시작)</li>
+<li><strong>2026년 4월 9일 종료 확정</strong> — 네이버는 AI 브리핑으로 전환 (현재 통합검색 쿼리 20% 적용, 2026 말까지 2배 확대 목표)</li>
+<li>의미: 네이버가 독립형 AI 검색 서비스를 접은 시점에, 다음이 AI Overview로 차별화된 검색 경험 제공 → 이탈 사용자 흡수 기회</li>
+<li>단, 네이버가 AI 브리핑(통합검색 내 AI 답변)은 강화 중이므로, "독립 AI 검색" 영역에서의 경쟁 공백을 노리는 것</li>
+</ul>
+
+<p><strong>카드 2: Solar 온프렘 비용 우위</strong></p>
+<ul>
+<li>핵심 로직: QC당 매출 ~10원인데, 외부 LLM API 비용이 쿼리당 5~7원이면 수익성 없음</li>
+<li>AI Overview 1회 쿼리당 Solar 모델 4회 호출 필요 (라우팅, 검색, 랭킹, 요약)</li>
+<li>Solar 온프렘: ~1원/쿼리 vs 외부 API(GPT-4o 등): 5~7원/쿼리 → <strong>80%+ 비용 절감</strong></li>
+<li>WAU MO 740만 + PC 540만 규모에서 외부 API 의존은 비용 구조상 불가능 → Solar 시너지의 필연성</li>
+</ul>
+
+<p><strong>카드 3: 검색 습관 형성 → 장기 LTV</strong></p>
+<ul>
+<li>"다음에서 검색하면 더 좋은 답변이 나온다"는 인식 구축이 목표</li>
+<li>현재 다음 검색 점유율 2.9% ('25 연간, StatCounter) → 빙(3.1%)에도 밀려 4위</li>
+<li>AI Overview로 검색 품질 차별화 → 이탈 방어 + 신규 유입 → 비즈니스 쿼리 트래픽으로 자연 전환</li>
+<li>네이버 AI 브리핑 도입 후 롱테일 쿼리(15자+) 2배 증가, 체류시간 10.4% 상승 사례 참고 → 다음도 유사 효과 기대</li>
+</ul>
+
+<p><strong>하단 한줄 인사이트</strong> (틸 배경):</p>
+<p>"논비즈니스 쿼리의 AI 검색 품질 향상 → 비즈니스 쿼리 트래픽 증가로 자연스럽게 연결되는 선순환 구조"</p>
+
+<p><strong>📸 이미지 요청 사항</strong>:</p>
+<ul>
+<li>AI Overview 실제 서비스 화면 (현재 RAG 기반 AI 검색 2025.12.17 오픈 — CDD 기준)이 있다면 캡처 요청</li>
+<li>없으면 위 목업 텍스트 기반으로 디자인 제작</li>
+</ul>
+
+<hr/>
+
+<h2>Slide 5 — 논비즈니스 쿼리: 기술 구조 및 비용 우위 (Data)</h2>
+
+<h3>목적</h3>
+<p>AI Overview의 기술 플로우와 비용 구조를 데이터로 설명. LP에게 "왜 Upstage Solar 시너지가 필수인가"를 비용 관점에서 설득.</p>
+
+<h3>레이아웃</h3>
+<ul>
+<li>좌측 50%: AI Overview 서비스 플로우 + 비용 비교 차트</li>
+<li>우측 50%: 핵심 지표 4개 + 경쟁 환경 박스</li>
+</ul>
+
+<h3>텍스트 내용</h3>
+
+<p><strong>섹션 태그</strong>: NON-BUSINESS QUERY<br/>
+<strong>타이틀</strong>: AI 검색 기술 구조 및 비용 우위 분석</p>
+
+<p><strong>좌측 상단 — AI Overview 서비스 플로우 (5단계 다이어그램)</strong>:</p>
+<pre>사용자 쿼리 입력 → [쿼리 라우팅*] → 벡터DB 검색 → [Solar LLM 요약 생성*] → AI Overview 결과 출력</pre>
+
+<ul>
+<li>*표시 = Solar 모델 호출 단계 (하이라이트 처리)</li>
+<li>주석: "1회 쿼리당 Solar 모델 약 4회 호출 (라우팅, 검색, 랭킹, 요약)" — 이건수 대표 미팅록 확인</li>
+<li>하이브리드 검색 방식: 벡터 검색(의미 유사도) + 키워드 검색(정확 매칭) 조합 → 정확도와 커버리지 동시 확보</li>
+</ul>
+
+<p><strong>좌측 하단 — 쿼리당 비용 비교 (수평 바 차트)</strong>:</p>
+<table>
+<tr><th>구분</th><th>비용/쿼리</th><th>바 색상</th><th>비고</th></tr>
+<tr><td>외부 API (GPT-4o 등)</td><td>5~7원</td><td>🔴 빨강</td><td>WAU 1,300만 규모에서 수익성 불가</td></tr>
+<tr><td>Solar 온프렘 (Upstage)</td><td>~1원</td><td>🟢 틸/초록</td><td>4회 호출 포함 기준</td></tr>
+</table>
+
+<ul>
+<li>하단 텍스트: <strong>"▼ 쿼리당 비용 80%+ 절감 → 대규모 트래픽에서도 수익성 확보"</strong></li>
+<li>참고: 온프렘 전환에 500억 투자 예정, 업스테이지와 협의 중 (회의록). 연간 유지비 별도 발생.</li>
+</ul>
+
+<p><strong>우측 상단 — 핵심 지표 4개 (2×2 카드)</strong>:</p>
+<table>
+<tr><th>지표</th><th>값</th><th>색상</th></tr>
+<tr><td>WAU</td><td>MO 740만 + PC 540만 ('25.12 FDD)</td><td>네이비</td></tr>
+<tr><td>쿼리당 Solar 호출</td><td>4회</td><td>틸</td></tr>
+<tr><td>Solar 온프렘 비용</td><td>~1원/쿼리</td><td>오렌지</td></tr>
+<tr><td>외부 API 비용</td><td>5~7원/쿼리</td><td>레드</td></tr>
+</table>
+
+<p><strong>우측 하단 — 경쟁 환경 및 차별화 포인트 (다크 배경 박스)</strong>:</p>
+
+<p>✦ <strong>네이버 CUE: 종료 ('26.4.9)</strong></p>
+<ul>
+<li>독립형 AI 검색 서비스 접음 → AI 브리핑(통합검색 내 AI 답변)으로 전환</li>
+<li>다음이 독립형 AI Overview로 포지셔닝할 수 있는 경쟁 공백</li>
+</ul>
+
+<p>✦ <strong>하이브리드 검색 구조</strong></p>
+<ul>
+<li>벡터 검색 + 키워드 검색 조합</li>
+<li>네이버 AI 브리핑 도입 후 롱테일 쿼리 2배 증가 사례 → 다음도 유사 효과 기대</li>
+</ul>
+
+<p>✦ <strong>자체 검색 인프라 보유</strong></p>
+<ul>
+<li>KAVE 엔진 (검색 엔진 코어)</li>
+<li>Straw (1,000억+ 문서 색인)</li>
+<li>Cruise (지식 그래프)</li>
+<li>서버 10,453대 (PM+VM+Krane) — FDD 기준</li>
+</ul>
+
+<p>✦ <strong>비용 구조 우위</strong></p>
+<ul>
+<li>Solar 온프렘으로 GPT 대비 80%+ 비용 절감</li>
+<li>현재 AWS 비용이 영업이익의 55% 차지 → 온프렘 전환 시 인프라 비용도 구조 개선</li>
+</ul>
+
+<h3>데이터 소스</h3>
+<ul>
+<li>WAU, 서버 수: FDD Final Report</li>
+<li>Solar 호출 횟수, 비용 구조: 이건수 대표 미팅록</li>
+<li>AWS 비용 비율: 이건수 대표 미팅록</li>
+<li>네이버 CUE: 종료: ZDNet ('26.2.25 보도)</li>
+<li>네이버 AI 브리핑 적용률: 네이버 컨콜 ('26.2.6)</li>
+<li>온프렘 투자 500억: 이건수 대표 미팅록</li>
+</ul>
+
+<hr/>
+
+<h2>Slide 6 — 콘텐츠 전략: 3대 Pillar (Visual)</h2>
+
+<h3>목적</h3>
+<p>검색 외 서비스로 유저 체류시간 및 Lock-in 효과를 어떻게 만들 것인지. 3 Pillar를 비중감 있게 시각적으로 보여줌 (1번 50%, 2·3번 각 25%).</p>
+
+<h3>레이아웃</h3>
+<ul>
+<li>좌측 50%: Pillar 1 (Core) — 큰 카드</li>
+<li>우측 상단 25%: Pillar 2 카드</li>
+<li>우측 하단 25%: Pillar 3 카드</li>
+</ul>
+
+<h3>텍스트 내용</h3>
+
+<p><strong>섹션 태그</strong>: CONTENT STRATEGY<br/>
+<strong>타이틀</strong>: 콘텐츠 생태계 강화: 3대 Pillar<br/>
+<strong>서브타이틀</strong>: 검색 외 서비스로 유저 체류 시간 및 Lock-in 효과 극대화</p>
+
+<p><strong>Pillar 1 (50%) — ⭐ 개인화 AI 큐레이션 페이지 [Core]</strong></p>
+
+<p>배지: CORE PILLAR — 50%</p>
+
+<p>내용:</p>
+<ul>
+<li>사용자별 관심사·검색 이력·구매 패턴을 Solar RAG로 분석하여 맞춤형 추천 콘텐츠와 상품을 제공하는 개인화 메인 페이지</li>
+<li><strong>이중 효과</strong>: 유저 편의성 제고 + 개인화 피드 내 SA 광고 자연스럽게 배치 → 클릭률 극대화</li>
+<li>벤치마크: Google Discover (DAU 8억+, 검색 이력·유튜브·크롬 이용 이력 등 시그널 기반 AI 큐레이션) / 네이버 MY</li>
+<li>다음의 강점: 카페(Daum Cafe), 티스토리(Tistory), 다음 메일, 검색 이력 등 풍부한 사용자 행동 데이터 보유 + 회원 수 3,000만명</li>
+</ul>
+
+<p>사용자 페르소나 예시 (2개 카드):</p>
+<ul>
+<li>👤 <strong>30대 초반 부부</strong>: 여행 추천, 자동차 비교, 육아 정보, 재테크 콘텐츠 → 여행·자동차 SA 광고 자연 노출</li>
+<li>👤 <strong>자동차 관심 유저</strong>: 신차 출시 정보, 중고차 시세, TCO 비교, 리뷰 → 자동차·보험 SA 광고 연결</li>
+</ul>
+
+<p>하단 강조: "→ 개인화 피드 내 SA 광고 자연스럽게 배치 → 클릭률 극대화"</p>
+
+<p>KPI 목표: SA 클릭률 +30%, 유저 체류시간 +40% (네이버 AI 브리핑 체류시간 +10.4% 사례 참고, 개인화 피드는 더 높은 효과 기대)</p>
+
+<p><strong>Pillar 2 (25%) — 📅 다음 메일 연동 AI 캘린더</strong></p>
+
+<p>배지: PILLAR 2 — 25%</p>
+
+<p>내용:</p>
+<ul>
+<li>타임트리 벤치마킹 (글로벌 5,500만 유저, 한국 MAU 약 80만, 월 100만 신규가입. 2026년 목표 1억 유저)</li>
+<li>다음 메일 사용자 기반 캘린더 서비스: 메일 내 일정 정보를 NLU로 자동 파싱 → 캘린더에 자동 등록</li>
+<li>관심사별 이벤트 자동 구독: 공연·스포츠 경기·청약 일정·세일 기간 등</li>
+<li>가족 일정 공유 & 학원 스케줄 관리 (타임트리 핵심 기능 벤치마크)</li>
+<li>위치 기반 이벤트 추천</li>
+<li><strong>LP 포인트</strong>: 메일 DAU 유지가 핵심 — 메일 사용자가 캘린더로 오면 다음 플랫폼 체류시간 자연 증가</li>
+</ul>
+
+<p><strong>Pillar 3 (25%) — 🤖 AI 에이전트형 뉴스·금융 서비스</strong></p>
+
+<p>배지: PILLAR 3 — 25%</p>
+
+<p>내용:</p>
+<ul>
+<li>AI 뉴스레터: 다음 클로(Klo) 개념 — 개인 관심사 기반 뉴스 큐레이션, 매일 맞춤 브리핑</li>
+<li>관심 종목·자산 현황 리포트: 금융 정보 맞춤 제공</li>
+<li>프리미엄 콘텐츠 구독 모델: 네이버 프리미엄콘텐츠 벤치마킹 (네이버는 크리에이터에게 유료 구독 기능 제공)</li>
+<li><strong>LP 포인트</strong>: 직접 수익(구독료)보다는 유저 리텐션 + 데이터 축적이 1차 목적. 장기적으로 구독 수익 모델 확장 가능.</li>
+<li>참고: 뉴닉, 퍼블리 등 뉴스레터/콘텐츠 구독 시장 성장 중</li>
+</ul>
+
+<hr/>
+
+<h2>Slide 7 — 콘텐츠 전략: 상세 실행 계획 및 로드맵 (Data)</h2>
+
+<h3>목적</h3>
+<p>3 Pillar 각각의 실행 스펙을 표로 정리하고, 전체 PMI의 시간축을 로드맵으로 마무리. 이 장표가 PMI 섹션의 마지막이므로, "구체적 실행 계획이 있다"는 인상을 LP에게 남기는 것이 핵심.</p>
+
+<h3>레이아웃</h3>
+<ul>
+<li>상단 60%: 3 Pillar 상세 카드 (3-column 테이블)</li>
+<li>하단 40%: 실행 로드맵 타임라인</li>
+</ul>
+
+<h3>텍스트 내용</h3>
+
+<p><strong>섹션 태그</strong>: CONTENT STRATEGY<br/>
+<strong>타이틀</strong>: 콘텐츠 전략 상세 실행 계획 및 로드맵</p>
+
+<p><strong>상단 — 3 Pillar 상세 카드</strong>:</p>
+
+<table>
+<tr><th>항목</th><th>⭐ AI 큐레이션 (Core)</th><th>📅 AI 캘린더</th><th>🤖 뉴스·금융</th></tr>
+<tr><td><strong>목표</strong></td><td>개인화 메인 페이지 → SA 클릭률 극대화</td><td>메일+캘린더 워크스페이스</td><td>AI 기반 정보 전달 서비스</td></tr>
+<tr><td><strong>핵심 기술</strong></td><td>Solar RAG + 사용자 행동 분석 (검색이력, Cafe, Tistory, 쇼핑)</td><td>메일 NLU 파싱 + 일정 자동 추출</td><td>AI 큐레이션 엔진 + 개인화 추천</td></tr>
+<tr><td><strong>데이터 소스</strong></td><td>검색 이력, Cafe/Tistory 활동, 쇼핑 행동, 회원 3,000만 프로파일</td><td>다음 메일 수신함</td><td>뉴스 피드, 금융 API, 사용자 관심사</td></tr>
+<tr><td><strong>벤치마크</strong></td><td>Google Discover (DAU 8억), 네이버 MY</td><td>타임트리 (글로벌 5,500만)</td><td>네이버 프리미엄콘텐츠, 뉴닉, 퍼블리</td></tr>
+<tr><td><strong>수익 연계</strong></td><td>개인화 SA 광고 + 추천 상품 CPC</td><td>이벤트 광고, 프리미엄 기능</td><td>구독료 + 광고 수익</td></tr>
+<tr><td><strong>KPI</strong></td><td>SA 클릭률 +30%, 체류시간 +40%</td><td>MAU +20%, 메일 DAU 유지</td><td>구독자 확보, ARPU 향상</td></tr>
+<tr><td><strong>우선순위</strong></td><td>★★★ 최우선</td><td>★★☆ 중기</td><td>★☆☆ 장기</td></tr>
+<tr><td><strong>전담 인력</strong></td><td>—</td><td>—</td><td>네이버 메일/카페/블로그 경험자 영입 검토 중 (회의록)</td></tr>
+</table>
+
+<p><strong>하단 — 실행 로드맵 (타임라인 형태)</strong>:</p>
+
+<pre>──●──────────────●──────────────●──────────────●──
+  Q2-Q3 '26       Q4 '26         H1 '27          H2 '27</pre>
+
+<table>
+<tr><th>시점</th><th>주요 실행 항목</th><th>비고</th></tr>
+<tr><td><strong>'26 Q2~Q3</strong></td><td>DA SSP 교체 (단기 성과), 다나와 쇼핑 제휴 착수 (최우선), AI Overview 베타 오픈, 온프렘 서버 전환 협의</td><td>SSP 교체는 즉시 가능한 quick win</td></tr>
+<tr><td><strong>'26 Q4</strong></td><td>개인화 피드 1차 런칭, 지역광고 도입 (카카오 협의 필요), 자동차 DB 연동/M&A 클로징</td><td>카카오와 지역광고 협의가 일정 리스크</td></tr>
+<tr><td><strong>'27 상반기</strong></td><td>AI 캘린더 베타 런칭, 뉴스 큐레이션 서비스 시작, 버티컬 DB 확장 (구인구직 등)</td><td>메일/캘린더 연동 기술 개발 기간 필요</td></tr>
+<tr><td><strong>'27 하반기</strong></td><td>풀 개인화 서비스 (AI 큐레이션 고도화), 프리미엄 콘텐츠 구독 모델, B2B API 제휴사 확대</td><td>IPO 시점 맞춤 성과 가시화 목표</td></tr>
+</table>
+
+<h3>데이터 소스</h3>
+<ul>
+<li>로드맵 시점: 이건수 대표 미팅록 + 내부 판단</li>
+<li>Google Discover DAU: 공식 발표 자료</li>
+<li>타임트리 유저 수: 디지털타임스 ('25.12) "5,500만명 애용" 보도</li>
+<li>전담 인력: 이건수 대표 미팅 "네이버 메일/카페/블로그 경험자 영입 검토 중"</li>
+</ul>
+
+<hr/>
+
+<h2>횡단 이슈 & 주의사항</h2>
+
+<h3>팩트체크 완료 사항</h3>
+<table>
+<tr><th>항목</th><th>이전 (틀린 것)</th><th>수정</th><th>소스</th></tr>
+<tr><td>네이버 AI 검색</td><td>"네이버 Q"</td><td><strong>네이버 CUE:</strong> (큐:), 2026.4.9 종료 확정</td><td>ZDNet '26.2.25</td></tr>
+<tr><td>네이버 전환 서비스</td><td>언급 없음</td><td><strong>AI 브리핑</strong> — 통합검색 쿼리 20% 적용, 연말 2배 확대</td><td>네이버 컨콜 '26.2.6</td></tr>
+<tr><td>카카오맵 지역광고</td><td>"카카오맵 연동 지역광고"</td><td>카카오맵 로컬광고 <strong>2022.10 종료</strong>. 다음 검색에서 네이버 파워플레이스 모델을 벤치마크해 <strong>새로 도입</strong></td><td>카카오 비즈니스 가이드</td></tr>
+<tr><td>Solar 모델</td><td>"Solar Pro3" (명칭만)</td><td><strong>Solar Pro 3</strong>: 1,020억 파라미터, Pro2 대비 3배 대형화, 에이전트 AI 특화, 비용/속도 동일 유지</td><td>헤럴드경제 '26.1</td></tr>
+<tr><td>파워링크 등</td><td>AXZ 자체 광고 상품으로 오해 가능</td><td>파워링크/파워쇼핑/파워플레이스는 <strong>네이버 Adpost</strong> 광고 상품. AXZ는 다음 검색 지면에 이를 노출하고 <strong>수익배분</strong> 받는 구조. '26.1 기준 SA의 93.2%가 네이버향</td><td>FDD Final Report</td></tr>
+<tr><td>다음 검색 점유율</td><td>"1,300만 WAU" (크기감 부족)</td><td>검색 점유율 <strong>2.9%</strong> ('25, StatCounter), <strong>빙(3.1%)에도 밀려 4위</strong></td><td>이코노미스트 '26.1</td></tr>
+</table>
+
+<h3>IM 공개 범위 확인 필요 사항</h3>
+<ol>
+<li>FDD 수치 (SA 분기별 매출, CPC 단가 등) → IM에 어디까지 공개?</li>
+<li>쇼핑하우 적정대가 (월 15~28억) → 카카오와 협의 중인 내용이라 민감할 수 있음</li>
+<li>온프렘 투자 500억 → 확정 전 수치</li>
+<li>M&A 검토 (다나와 자동차, 범고) → LP에게 어떤 수준까지?</li>
+<li>네이버향 SA 93.2% → 의존도가 높다는 게 오히려 리스크로 읽힐 수 있으므로 표현 조절 필요</li>
+</ol>
+
+<h3>추가 작업 필요 사항</h3>
+<ol>
+<li><strong>윤주희 매니저님 이미지 요청</strong>: Slide 2, 4, 6의 visual 장표에 실제 검색 화면 스크린샷/목업</li>
+<li><strong>이건수 대표님 확인</strong>: 쿼리당 매출 "10원→30원" 추정치의 근거 정밀화 (현재는 미팅 대화 기반 추정)</li>
+<li><strong>카카오 협의 현황</strong>: 지역광고 도입, 쇼핑하우 적정대가 등 카카오와의 협상 진행도</li>
+</ol>
+
+</div>
+</div>
+
+<!-- TAB 2: Deck Preview -->
+<div id="deck" class="tab-content">
+<div class="deck-slides">
+
+<!-- Slide 1 -->
+<div class="slide-label">Slide 1 — PMI 전략 Overview</div>
+<div class="slide s1">
+<div class="top-bar"></div>
+<div class="header-area">
+<div class="section-label">POST-MERGER INTEGRATION</div>
+<div class="title">AXZ 장기 PMI 전략: 3대 축 기반 가치 창출</div>
+<div class="subtitle">Upstage Solar 모델 시너지를 활용한 검색 포털의 AI 전환 및 수익 구조 고도화</div>
+</div>
+<div class="three-cols">
+<div class="col">
+<div class="col-icon">💰</div>
+<div class="col-title">비즈니스 쿼리<br/>수익화 강화</div>
+<ul class="col-items">
+<li>Solar 기반 AI 검색 → SA 클릭률 극대화</li>
+<li>외부 구조화 DB 연동 → QC당 SA 매출 2~3배 향상</li>
+<li>쇼핑·자동차·지역검색 버티컬 확대</li>
+<li>개인화·타게팅 광고 노출 고도화</li>
+</ul>
+<div class="col-tag">수익 직결 — 최우선 과제</div>
+</div>
+<div class="col">
+<div class="col-icon">🔍</div>
+<div class="col-title">논비즈니스 쿼리<br/>트래픽 확보</div>
+<ul class="col-items">
+<li>AI Overview로 검색 품질 차별화</li>
+<li>네이버 CUE: 서비스 '26.4.9 종료 시점 선제 진입</li>
+<li>사용자 유입 및 검색 습관 형성</li>
+<li>장기 사용자 LTV 극대화 기반 구축</li>
+</ul>
+<div class="col-tag">트래픽 — 장기 성장 기반</div>
+</div>
+<div class="col">
+<div class="col-icon">📱</div>
+<div class="col-title">콘텐츠 생태계<br/>신규 서비스</div>
+<ul class="col-items">
+<li>AI 큐레이션 기반 개인화 페이지</li>
+<li>다음메일 연동 소셜 캘린더 서비스</li>
+<li>뉴스·금융 에이전트형 정보 서비스</li>
+<li>프리미엄 콘텐츠 · 버티컬 커뮤니티</li>
+</ul>
+<div class="col-tag">생태계 — 유저 Lock-in</div>
+</div>
+</div>
+<div class="bottom-strip">
+<div class="metric">
+<div class="metric-val">MO 740만 + PC 540만</div>
+<div class="metric-label">WAU (주간 활성 사용자)</div>
+</div>
+<div class="metric">
+<div class="metric-val">1,000억+</div>
+<div class="metric-label">색인 문서 수</div>
+</div>
+<div class="metric">
+<div class="metric-val">571억원</div>
+<div class="metric-label">SA 연매출 ('26P)</div>
+</div>
+<div class="metric">
+<div class="metric-val">Solar Pro3 (102B params)</div>
+<div class="metric-label">Upstage LLM 시너지</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide-label">Slide 2 — 비즈니스 쿼리: 수익화 전략 (Visual)</div>
+<div class="slide s2">
+<div class="left-accent"></div>
+<div class="header">
+<div class="section-tag">BUSINESS QUERY</div>
+<div class="title">비즈니스 쿼리 수익화 전략</div>
+<div class="subtitle">Solar AI 검색 강화 + 외부 구조화 DB 연동을 통한 쿼리당 매출 극대화</div>
+</div>
+<div class="content-area">
+<div class="flow-section">
+<div class="flow-box">
+<div class="flow-title">SA 수익 극대화 Value Chain</div>
+<div class="flow-steps">
+<div class="flow-step">Solar LLM<br/>검색 품질 강화</div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">하이브리드 검색<br/>(벡터+키워드)</div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">개인화<br/>광고 타게팅</div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">클릭률 증가<br/>단가 극대화</div>
+</div>
+<div style="margin-top:8px; font-size:8.5px; color:#64748B; line-height:1.3; text-align:left; background:rgba(100,116,139,0.05); padding:8px; border-radius:4px; border-left:2px solid #64748B;">
+Upstage Solar Pro3 (102B 파라미터) 기반 검색 랭킹 모델이 쿼리 의도를 더 정확히 파악 → 관련성 높은 SA 광고 노출 → 클릭률 상승<br/>
+현재 SA는 네이버 Adpost 파워링크 중심 (SA의 93.2%, '26.1월 FDD 기준)
+</div>
+</div>
+<div class="value-highlight">
+<div class="big-num">10원→30원</div>
+<div class="desc">
+QC당 SA 매출 2~3배 향상 기대 (SA CTR 2.6%→5~8%)<br/><span style="font-size:9px;opacity:0.85;">※ 검색 1회당 평균 SA 수익. CPC(클릭당 단가) ASP 390원과 혼동 주의</span>
+</div>
+</div>
+<div style="display:flex; gap:8px; margin-top:12px;">
+<div style="flex:1; background:#EFF6FF; border-radius:8px; padding:10px; text-align:center;">
+<div style="font-size:18px; font-weight:800; color:#0A6EBD;">SA 강화</div>
+<div style="font-size:9px; color:#64748B;">검색광고 클릭률 최적화</div>
+<div style="font-size:8px; color:#0A6EBD; margin-top:4px; font-weight:600;">ASP 390원→상승 목표</div>
+</div>
+<div style="flex:1; background:#F0FDF4; border-radius:8px; padding:10px; text-align:center;">
+<div style="font-size:18px; font-weight:800; color:#10B981;">DA 전환</div>
+<div style="font-size:9px; color:#64748B;">SSP 교체 + 지면 최적화</div>
+</div>
+<div style="flex:1; background:#FEF3C7; border-radius:8px; padding:10px; text-align:center;">
+<div style="font-size:18px; font-weight:800; color:#D97706;">B2B API</div>
+<div style="font-size:9px; color:#64748B;">제휴사 AI검색 엔진 제공</div>
+<div style="font-size:8px; color:#D97706; margin-top:4px; font-weight:600;">원가+10% 마크업 3자 계약</div>
+</div>
+</div>
+</div>
+<div class="cards-section">
+<div class="vcard">
+<div class="vcard-icon">🛒</div>
+<div>
+<div class="vcard-title">쇼핑 검색</div>
+<div class="vcard-partner">Partner: 다나와</div>
+<div class="vcard-desc">상품 DB 연동 → 가격비교·스펙 정보 직접 노출<br/>검색 결과 내 구매 전환율 극대화<br/><span style="color:#10B981; font-size:8px; margin-top:4px; display:inline-block;">쇼핑하우 적정대가 수취 시 월 15~28억 추정 (FDD) | 우선순위: ★★★</span></div>
+</div>
+</div>
+<div class="vcard">
+<div class="vcard-icon">🚗</div>
+<div>
+<div class="vcard-title">자동차 검색</div>
+<div class="vcard-partner">Partner: 다나와 자동차</div>
+<div class="vcard-desc">차량 견적·TCO 비교 DB 연동<br/>신차+중고차 통합 검색 경험 제공<br/><span style="color:#0A6EBD; font-size:8px; margin-top:4px; display:inline-block;">연매출 ~30억, MBK 소유, 100억대 인수, 2년 회수</span></div>
+</div>
+</div>
+<div class="vcard">
+<div class="vcard-icon">📍</div>
+<div>
+<div class="vcard-title">지역 검색</div>
+<div class="vcard-partner">Partner: 카카오맵</div>
+<div class="vcard-desc">네이버 파워플레이스 모델 벤치마크 CPC 지역광고 새로 도입<br/>카카오맵 로컬광고 2022.10 종료 → 연 400억 목표<br/><span style="color:#64748B; font-size:8px; margin-top:4px; display:inline-block;">파워플레이스 CPC ~288원</span></div>
+</div>
+</div>
+<div class="vcard">
+<div class="vcard-icon">🤝</div>
+<div>
+<div class="vcard-title">구인구직·전문가 매칭</div>
+<div class="vcard-partner">Partner: 숨고·알바몬·크몽</div>
+<div class="vcard-desc">전문가 매칭 DB 연동, CPC + 리드 수수료<br/>네이버 검색 품질 낮은 니치 선점<br/><span style="color:#64748B; font-size:8px; margin-top:4px; display:inline-block;">크몽 449만 회원, 2025 영업이익 43억 +617%</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide-label">Slide 3 — 비즈니스 쿼리: 상세 분석 (Data)</div>
+<div class="slide s3">
+<div class="left-accent"></div>
+<div class="header">
+<div class="section-tag">BUSINESS QUERY</div>
+<div class="title">비즈니스 쿼리: 버티컬별 수익화 상세 전략</div>
+</div>
+<div class="content-area">
+<div class="table-section">
+<table>
+<thead>
+<tr>
+<th style="width:14%">버티컬</th>
+<th style="width:15%">제휴 파트너</th>
+<th style="width:25%">연동 DB / 서비스</th>
+<th style="width:26%">수익 모델</th>
+<th style="width:20%">기대 효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="font-weight:700;">쇼핑</td>
+<td><span class="partner-tag">다나와</span></td>
+<td>상품 DB (가격비교, 스펙, 리뷰)<br/>실시간 최저가 정보</td>
+<td>CPC 광고 수수료 모델<br/>검색 결과 내 쇼핑 SA 노출</td>
+<td style="color:#10B981; font-weight:700;">쇼핑하우 적정대가 월 15~28억(FDD). QC당 10→25~30원</td>
+</tr>
+<tr>
+<td style="font-weight:700;">자동차</td>
+<td><span class="partner-tag">다나와 자동차</span></td>
+<td>차량 견적, TCO 비교 DB<br/>연 매출 30억 규모 서비스</td>
+<td>광고 수수료 + DB 활용<br/>신차·중고차 통합 검색</td>
+<td style="color:#10B981; font-weight:700;">100억대 인수<br/>2년 내 회수 목표</td>
+</tr>
+<tr>
+<td style="font-weight:700;">지역검색</td>
+<td><span class="partner-tag">카카오맵</span></td>
+<td>POI 정보, 지역 업체 DB<br/>파워링크·파워플레이스</td>
+<td>CPC지역광고 새로 도입 (카카오맵 로컬광고 2022 종료)</td>
+<td style="color:#0A6EBD; font-weight:700;">네이버 1/10 규모 → 연 400억 목표</td>
+</tr>
+<tr>
+<td style="font-weight:700;">구인구직</td>
+<td><span class="partner-tag">숨고</span> <span class="partner-tag">알바몬</span> <span class="partner-tag">크몽</span></td>
+<td>전문가 매칭, 구인 DB<br/>크몽(449만 회원), 프리랜서 시장 YoY+23%</td>
+<td>CPC + 리드 수수료<br/>크몽 등 확장 가능</td>
+<td style="color:#0A6EBD; font-weight:700;">니치 시장<br/>선점 효과</td>
+</tr>
+</tbody>
+</table>
+<div class="insight-box" style="margin-top:12px;">
+<div class="insight-title">KEY INSIGHT</div>
+<div class="insight-text">
+Upstage Solar LLM + RAG 기반 구조화 DB 검색은 범용 LLM(GPT, Gemini) 대비 <b>특정 도메인 정확도에서 우위</b> 확보 가능 —
+예: "갤럭시 S26 Ultra 세부 사양"과 같은 쿼리에서 구조화된 DB가 할루시네이션 없이 정확한 답변 제공
+</div>
+</div>
+<div style="margin-top:10px; padding:10px; background:rgba(100,116,139,0.08); border-radius:6px; border-left:2px solid #64748B;">
+<div style="font-size:8px; color:#64748B; line-height:1.4;">
+<b>산출 근거:</b> SA 연 ~570억 ÷ 검색 QC 연 ~55.6억회 ≒ 10.3원. CTR ~2.6% 역산: 10원÷390원. 목표 ~30원은 CTR ~7.7% 필요. 네이버 파워쇼핑 대 파워링크 CTR 차이가 유사 배수
+</div>
+</div>
+</div>
+<div class="chart-section">
+<div class="chart-box">
+<div class="chart-title">QC당 SA 매출 변화 전망</div>
+<div class="bar-chart">
+<div class="bar-item">
+<div class="bar-label"><span>현재 (텍스트 SA, CTR ~2.6%)</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:33%; background:var(--slate);">~10원</div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>DB 연동 후 (CTR ~6.4%)</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:83%; background:var(--ocean);">~25원</div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>풀 버티컬 (CTR ~7.7%)</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:100%; background: linear-gradient(90deg, var(--ocean), var(--teal));">~30원</div>
+</div>
+</div>
+</div>
+<div class="chart-footnote">※ QC당 SA 매출 = SA 연매출 ÷ 연간 총 QC. CTR 향상이 핵심 드라이버</div>
+
+<div class="chart-title" style="margin-top:18px;">SA 매출 플랫폼별 구성 ('25 4Q 분기, FDD)</div>
+<div class="bar-chart">
+<div class="bar-item">
+<div class="bar-label"><span>파워링크</span><span style="font-weight:600;">101.3억</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:70%; background:#10B981;">70.3%</div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>파워쇼핑</span><span style="font-weight:600;">23.8억</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:16%; background:var(--accent-orange);">16.5%</div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>파워플레이스</span><span style="font-weight:600;">3.5억</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:2%; background:var(--teal); min-width:28px;">2.4%</div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>카카오</span><span style="font-weight:600;">9.1억</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:6%; background:#FCD34D; color:#000;">6.3%</div>
+</div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>구글</span><span style="font-weight:600;">6.4억</span></div>
+<div class="bar-track">
+<div class="bar-fill" style="width:4%; background:var(--accent-purple); min-width:28px;">4.4%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide-label">Slide 4 — 논비즈니스 쿼리: AI 오버뷰 (Visual)</div>
+<div class="slide s4">
+<div class="top-line"></div>
+<div class="header">
+<div class="section-tag">NON-BUSINESS QUERY</div>
+<div class="title">AI Overview: 검색 품질 차별화를 통한 트래픽 확보</div>
+<div class="subtitle">직접 수익보다 사용자 습관 형성과 장기 트래픽 유입이 핵심 목적</div>
+</div>
+<div class="content-area">
+<div class="left-col">
+<div class="mockup-area">
+<div class="mockup-header">
+<div class="mockup-dot" style="background:#FF5F57;"></div>
+<div class="mockup-dot" style="background:#FFBD2E;"></div>
+<div class="mockup-dot" style="background:#28CA41;"></div>
+<span style="font-size:10px; color:#64748B; margin-left:8px;">daum.net</span>
+</div>
+<div class="mockup-searchbar">🔍  2026년 부동산 전망과 금리 영향은?</div>
+<div class="ai-overview-box">
+<div class="ai-badge">✨ AI Overview · Powered by Solar</div>
+<div class="ai-overview-text">
+2026년 부동산 시장은 기준금리 인하 기조와 함께 수도권 중심으로 회복세를 보이고 있습니다.
+한국은행의 3월 금리 동결에도 하반기 추가 인하 기대감이 유지되며,
+서울 아파트 매매가는 전월 대비 0.3% 상승했습니다...
+</div>
+<div class="ai-source">
+<span>📰 한국경제</span>
+<span>📊 한국은행 보고서</span>
+<span>🏠 부동산114</span>
+</div>
+</div>
+<div style="margin-top:10px; padding:8px 12px; background:rgba(255,255,255,0.03); border-radius:6px; border:1px solid rgba(255,255,255,0.08);">
+<div style="font-size:9px; color:#64748B; margin-bottom:4px;">관련 검색</div>
+<div style="display:flex; gap:6px; flex-wrap:wrap;">
+<span style="font-size:9px; background:rgba(255,255,255,0.06); padding:3px 8px; border-radius:10px; color:#94A3B8;">2026 서울 아파트 전망</span>
+<span style="font-size:9px; background:rgba(255,255,255,0.06); padding:3px 8px; border-radius:10px; color:#94A3B8;">금리 인하 시기</span>
+<span style="font-size:9px; background:rgba(255,255,255,0.06); padding:3px 8px; border-radius:10px; color:#94A3B8;">부동산 투자 전략</span>
+</div>
+</div>
+</div>
+</div>
+<div class="right-col">
+<div class="strategy-cards">
+<div class="strat-card">
+<div class="strat-num">1</div>
+<div>
+<div class="strat-title">네이버 CUE: 종료 시점 선점</div>
+<div class="strat-desc">네이버 CUE:(큐:) 2026.4.9 종료 확정 → AI 브리핑 전환 (통합검색 쿼리 20% 적용). 다음이 독립형 AI Overview로 차별화된 검색 경험 제공</div>
+</div>
+</div>
+<div class="strat-card">
+<div class="strat-num">2</div>
+<div>
+<div class="strat-title">Solar 온프렘 비용 우위</div>
+<div class="strat-desc">QC당 ~10원 수익에서 외부 API 5~7원 불가 → Solar 온프렘 ~1원/쿼리 (80%+ 절감). WAU MO740만+PC540만 대응<br/><span style="color:#94A3B8; font-size:8px; margin-top:3px; display:inline-block;">AI Overview 1회 쿼리당 Solar 4회 호출 필요 (라우팅, 검색, 랭킹, 요약)</span></div>
+</div>
+</div>
+<div class="strat-card">
+<div class="strat-num">3</div>
+<div>
+<div class="strat-title">검색 습관 형성 → 장기 LTV</div>
+<div class="strat-desc">검색 점유율 2.9%(빙 3.1%에도 밀려 4위, '25 StatCounter). AI Overview로 검색 품질 차별화 → 이탈 방어 + 신규 유입<br/><span style="color:#94A3B8; font-size:8px; margin-top:3px; display:inline-block;">네이버 AI 브리핑 도입 후 롱테일 쿼리(15자+) 2배 증가, 체류시간 10.4% 상승 사례 → 다음도 유사 효과 기대</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bottom-insight">
+<span>💡</span> 논비즈니스 쿼리의 AI 검색 품질 향상은 비즈니스 쿼리 트래픽 증가로 자연스럽게 연결 — 선순환 구조 형성
+</div>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide-label">Slide 5 — 논비즈니스 쿼리: 기술 구조 및 경쟁 우위 (Data)</div>
+<div class="slide s5">
+<div class="top-line"></div>
+<div class="header">
+<div class="section-tag">NON-BUSINESS QUERY</div>
+<div class="title">AI 검색 기술 구조 및 비용 우위 분석</div>
+</div>
+<div class="content-area">
+<div class="left-col">
+<div class="tech-flow">
+<div class="tech-flow-title">AI Overview 서비스 플로우</div>
+<div class="flow-horizontal">
+<div class="flow-node">사용자<br/>쿼리 입력</div>
+<span class="flow-connector">→</span>
+<div class="flow-node highlight">쿼리<br/>라우팅</div>
+<span class="flow-connector">→</span>
+<div class="flow-node">벡터DB<br/>검색</div>
+<span class="flow-connector">→</span>
+<div class="flow-node highlight">Solar LLM<br/>요약 생성</div>
+<span class="flow-connector">→</span>
+<div class="flow-node">AI Overview<br/>결과 출력</div>
+</div>
+<div style="text-align:center; margin-top:8px; font-size:9px; color:var(--text-light);">
+* 1회 쿼리당 Solar 모델 약 4회 호출 (라우팅, 검색, 랭킹, 요약)
+</div>
+</div>
+<div class="cost-compare">
+<div class="cost-title">쿼리당 비용 구조 비교</div>
+<div class="cost-row">
+<div class="cost-label">외부 API<br/>(GPT-4o 등)</div>
+<div class="cost-bar-track">
+<div class="cost-bar-fill" style="width:85%; background:#EF4444;">5~7원 / 쿼리</div>
+</div>
+</div>
+<div class="cost-row">
+<div class="cost-label">Solar 온프렘<br/>(Upstage)</div>
+<div class="cost-bar-track">
+<div class="cost-bar-fill" style="width:25%; background:var(--teal);">~1원 / 쿼리</div>
+</div>
+</div>
+<div class="cost-savings">▼ 쿼리당 비용 80%+ 절감 → 대규모 트래픽에서도 수익성 확보</div>
+</div>
+</div>
+<div class="right-col">
+<div class="metrics-grid">
+<div class="metric-card">
+<div class="metric-val">MO 740만 + PC 540만</div>
+<div class="metric-label">WAU</div>
+</div>
+<div class="metric-card">
+<div class="metric-val" style="color:var(--teal);">4회</div>
+<div class="metric-label">쿼리당 Solar 호출 수</div>
+</div>
+<div class="metric-card">
+<div class="metric-val" style="color:var(--accent-orange);">~1원</div>
+<div class="metric-label">Solar 온프렘 쿼리 비용</div>
+</div>
+<div class="metric-card">
+<div class="metric-val" style="color:#EF4444;">5~7원</div>
+<div class="metric-label">외부 API 쿼리 비용</div>
+</div>
+</div>
+<div class="competitive-box">
+<div class="competitive-title">경쟁 환경 및 차별화 포인트</div>
+<div class="competitive-items">
+<div style="margin-bottom:6px;">
+<span style="color:var(--teal); font-weight:700;">✦ 네이버 CUE: 종료 ('26.4.9)</span><br/>
+<span style="font-size:9.5px;">AI 브리핑 전환 → 다음이 독립형 AI Overview로 포지셔닝 가능한 경쟁 공백</span>
+</div>
+<div style="margin-bottom:6px;">
+<span style="color:var(--teal); font-weight:700;">✦ 하이브리드 검색 구조</span><br/>
+<span style="font-size:9.5px;">벡터 검색 + 키워드 검색 조합으로 정확도와 커버리지 동시 확보<br/>
+<span style="font-size:8.5px; color:#94A3B8;">네이버 AI 브리핑 도입 후 롱테일 쿼리 2배 증가, 체류시간 +10.4% 사례</span></span>
+</div>
+<div style="margin-bottom:6px;">
+<span style="color:var(--teal); font-weight:700;">✦ 자체 검색 인프라 보유</span><br/>
+<span style="font-size:9.5px;">KAVE + Straw(1,000억 문서) + Cruise(지식 그래프) + 서버 10,453대</span>
+</div>
+<div>
+<span style="color:var(--teal); font-weight:700;">✦ 비용 구조 우위</span><br/>
+<span style="font-size:9.5px;">Solar 온프렘으로 GPT 대비 80%+ 비용 절감 → 대규모 서비스 가능<br/>
+<span style="font-size:8.5px; color:#94A3B8;">현재 AWS 비용이 영업이익의 55% 차지 → 온프렘 전환 시 인프라 비용도 구조 개선. 온프렘 전환에 500억 투자 예정</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide-label">Slide 6 — 콘텐츠 전략: 3대 Pillar (Visual)</div>
+<div class="slide s6">
+<div class="left-accent"></div>
+<div class="header">
+<div class="section-tag">CONTENT STRATEGY</div>
+<div class="title">콘텐츠 생태계 강화: 3대 Pillar</div>
+<div class="subtitle">검색 외 서비스로 유저 체류 시간 및 Lock-in 효과 극대화</div>
+</div>
+<div class="pillars-area">
+<div class="pillar main">
+<div class="pillar-badge">⭐ CORE PILLAR — 50%</div>
+<div class="pillar-title">개인화 AI 큐레이션 페이지</div>
+<div class="pillar-desc">
+사용자별 관심사·검색 이력·구매 패턴을 분석하여 <b>맞춤형 추천 콘텐츠와 상품</b>을 제공하는
+개인화 메인 페이지 구축. SA 클릭률 극대화와 유저 편의성을 동시에 달성. (Google Discover DAU 8억+ 벤치마크, 회원 3,000만 데이터 활용)<br/>
+<span style="display:block; margin-top:6px; font-size:8px; color:#D97706; font-weight:600;">KPI: SA 클릭률 +30%, 체류시간 +40%</span>
+</div>
+<div class="pillar-mockup">
+<div class="mockup-label">사용자 맞춤 콘텐츠 예시</div>
+<div style="display:flex; gap:8px; margin-bottom:6px;">
+<div style="flex:1; background:#FFF; border-radius:6px; padding:8px; font-size:9px; border:1px solid #E2E8F0;">
+<div style="font-weight:700; color:#0F172A; margin-bottom:2px;">👤 30대 초반 부부</div>
+<div style="color:#64748B;">여행 추천, 자동차 비교, 육아 정보, 재테크 콘텐츠</div>
+</div>
+<div style="flex:1; background:#FFF; border-radius:6px; padding:8px; font-size:9px; border:1px solid #E2E8F0;">
+<div style="font-weight:700; color:#0F172A; margin-bottom:2px;">👤 자동차 관심 유저</div>
+<div style="color:#64748B;">신차 출시 정보, 중고차 시세, TCO 비교, 리뷰</div>
+</div>
+</div>
+<div style="font-size:9px; color:#D97706; font-weight:600; text-align:center;">
+→ 개인화 피드 내 SA 광고 자연스럽게 배치 → 클릭률 극대화
+</div>
+</div>
+</div>
+<div class="pillar sub">
+<div class="pillar-badge">📅 PILLAR 2 — 25%</div>
+<div class="pillar-title">다음 메일 연동<br/>AI 캘린더</div>
+<div class="pillar-desc">
+타임트리 벤치마킹 (글로벌 5,500만 유저) — 메일 기반 일정 자동 파싱 + 관심사별 이벤트 자동 구독<br/>
+<span style="display:block; margin-top:4px; font-size:8px; color:#0A6EBD; font-weight:600;">LP 포인트: 메일 DAU 유지가 핵심 — 메일 사용자가 캘린더로 오면 다음 플랫폼 체류시간 자연 증가</span>
+</div>
+<ul class="pillar-features">
+<li>공연·스포츠·청약 일정 자동 구독</li>
+<li>가족 일정 공유 & 학원 스케줄</li>
+<li>위치 기반 이벤트 추천</li>
+<li>메일+캘린더 워크스페이스</li>
+</ul>
+</div>
+<div class="pillar sub">
+<div class="pillar-badge">🤖 PILLAR 3 — 25%</div>
+<div class="pillar-title">AI 에이전트형<br/>뉴스·금융 서비스</div>
+<div class="pillar-desc">
+개인 관심사 기반 뉴스 큐레이션 및 금융 정보 맞춤 제공<br/>
+<span style="display:block; margin-top:4px; font-size:8px; color:#8B5CF6; font-weight:600;">LP 포인트: 직접 수익(구독료)보다는 유저 리텐션 + 데이터 축적이 1차 목적</span>
+</div>
+<ul class="pillar-features">
+<li>AI 뉴스레터 (다음 클로(Klo) 개념)</li>
+<li>관심 종목·자산 현황 리포트</li>
+<li>프리미엄 콘텐츠 구독</li>
+<li>네이버 프리미엄 벤치마킹</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide-label">Slide 7 — 콘텐츠 전략: 상세 실행 계획 (Data)</div>
+<div class="slide s7">
+<div class="left-accent"></div>
+<div class="header">
+<div class="section-tag">CONTENT STRATEGY</div>
+<div class="title">콘텐츠 전략 상세 실행 계획 및 로드맵</div>
+</div>
+<div class="content-area">
+<div class="detail-grid">
+<div class="detail-card">
+<div class="detail-card-header">⭐ AI 큐레이션 페이지 (Core)</div>
+<div class="detail-card-body">
+<div class="detail-row"><span class="detail-key">목표</span><span class="detail-val">개인화 메인 페이지 → SA 클릭률 극대화</span></div>
+<div class="detail-row"><span class="detail-key">핵심 기술</span><span class="detail-val">Solar RAG + 사용자 행동 분석</span></div>
+<div class="detail-row"><span class="detail-key">데이터 소스</span><span class="detail-val">검색 이력, Cafe/Tistory, 쇼핑 행동</span></div>
+<div class="detail-row"><span class="detail-key">수익 연계</span><span class="detail-val">개인화 SA + 추천 상품 (CPC)</span></div>
+<div class="detail-row"><span class="detail-key">벤치마크</span><span class="detail-val">Google Discover (DAU 8억+)</span></div>
+<div class="detail-row"><span class="detail-key">KPI</span><span class="detail-val">SA 클릭률 +30%, 체류시간 +40%</span></div>
+<div class="detail-row"><span class="detail-key">우선순위</span><span class="detail-val" style="color:#F59E0B;">★★★ 최우선</span></div>
+</div>
+</div>
+<div class="detail-card">
+<div class="detail-card-header">📅 AI 캘린더</div>
+<div class="detail-card-body">
+<div class="detail-row"><span class="detail-key">목표</span><span class="detail-val">메일+캘린더<br/>워크스페이스</span></div>
+<div class="detail-row"><span class="detail-key">기술</span><span class="detail-val">메일 파싱<br/>NLU 일정 추출</span></div>
+<div class="detail-row"><span class="detail-key">벤치마크</span><span class="detail-val">타임트리 (글로벌 5,500만)</span></div>
+<div class="detail-row"><span class="detail-key">차별화</span><span class="detail-val">관심사 자동구독<br/>위치 기반 추천</span></div>
+<div class="detail-row"><span class="detail-key">KPI</span><span class="detail-val">MAU +20%<br/>메일 DAU 유지</span></div>
+<div class="detail-row"><span class="detail-key">우선순위</span><span class="detail-val" style="color:#0A6EBD;">★★☆ 중기</span></div>
+</div>
+</div>
+<div class="detail-card">
+<div class="detail-card-header">🤖 뉴스·금융 서비스</div>
+<div class="detail-card-body">
+<div class="detail-row"><span class="detail-key">목표</span><span class="detail-val">AI 기반 정보<br/>전달 서비스</span></div>
+<div class="detail-row"><span class="detail-key">기술</span><span class="detail-val">AI 큐레이션<br/>개인화 추천</span></div>
+<div class="detail-row"><span class="detail-key">벤치마크</span><span class="detail-val">네이버 프리미엄<br/>뉴닉/퍼블리</span></div>
+<div class="detail-row"><span class="detail-key">수익모델</span><span class="detail-val">구독료<br/>+ 광고 수익</span></div>
+<div class="detail-row"><span class="detail-key">KPI</span><span class="detail-val">구독자 확보<br/>ARPU 향상</span></div>
+<div class="detail-row"><span class="detail-key">우선순위</span><span class="detail-val" style="color:#8B5CF6;">★☆☆ 장기</span></div>
+</div>
+</div>
+</div>
+<div class="timeline-section">
+<div class="timeline-title">실행 로드맵</div>
+<div class="timeline">
+<div class="tl-item">
+<div class="tl-dot">Q2</div>
+<div class="tl-period">'26 Q2-Q3</div>
+<div class="tl-desc">DA SSP 교체<br/>다나와 쇼핑 제휴<br/>AI Overview 베타<br/><span style="font-size:8px; color:#94A3B8; margin-top:3px; display:block;">비고: SSP 교체는 즉시 가능한 quick win</span></div>
+</div>
+<div class="tl-item">
+<div class="tl-dot">Q4</div>
+<div class="tl-period">'26 Q4</div>
+<div class="tl-desc">개인화 피드 1차 런칭<br/>지역광고 도입<br/>자동차 DB 연동<br/><span style="font-size:8px; color:#94A3B8; margin-top:3px; display:block;">비고: 카카오와 지역광고 협의가 일정 리스크</span></div>
+</div>
+<div class="tl-item">
+<div class="tl-dot">H1</div>
+<div class="tl-period">'27 상반기</div>
+<div class="tl-desc">AI 캘린더 베타<br/>뉴스 큐레이션 런칭<br/>버티컬 확장<br/><span style="font-size:8px; color:#94A3B8; margin-top:3px; display:block;">비고: 메일/캘린더 연동 기술 개발 기간 필요</span></div>
+</div>
+<div class="tl-item">
+<div class="tl-dot">H2</div>
+<div class="tl-period">'27 하반기</div>
+<div class="tl-desc">풀 개인화 서비스<br/>프리미엄 콘텐츠<br/>B2B API 확대<br/><span style="font-size:8px; color:#94A3B8; margin-top:3px; display:block;">비고: IPO 시점 맞춤 성과 가시화 목표</span></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
 <script>
-function switchTab(id) {
+function switchSection(sectionId) {
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.section-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
+  event.target.classList.add('active');
+
+  // Reset tabs when switching sections
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+  // Activate first tab in the new section
+  const tabBtns = document.querySelectorAll('.section.active .tab-btn');
+  const tabContents = document.querySelectorAll('.section.active .tab-content');
+  if (tabBtns.length > 0 && tabContents.length > 0) {
+    tabBtns[0].classList.add('active');
+    tabContents[0].classList.add('active');
+  }
+}
+
+function switchTab(id) {
+  const section = document.querySelector('.section.active');
+  section.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  section.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   event.target.classList.add('active');
 }
