@@ -26,6 +26,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .tab-btn.active{color:var(--purple);border-bottom-color:var(--purple)}
 .tab-content{display:none;padding:24px;max-width:800px;margin:0 auto}
 .tab-content.active{display:block}
+#service-detail{max-width:960px;}
+#service-detail.active{display:block;}
 
 /* === Page 1: Pipeline Detail === */
 .pipe{display:flex;flex-direction:column;gap:0}
@@ -357,16 +359,16 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 <!-- ============ SECTION NAVIGATION ============ -->
 <div class="section-nav">
-  <button class="section-btn active" onclick="switchSection('ai-search')">AI Search Pipeline</button>
-  <button class="section-btn" onclick="switchSection('pmi')">IM-PMI Ideation</button>
+  <button class="section-btn active" onclick="switchSection('ai-search', this)">AI Search Pipeline</button>
+  <button class="section-btn" onclick="switchSection('pmi', this)">IM-PMI Ideation</button>
 </div>
 
 <!-- ============ SECTION 1: AI SEARCH PIPELINE ============ -->
 <div id="ai-search" class="section active">
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('pipeline')">파이프라인 상세</button>
-  <button class="tab-btn" onclick="switchTab('economics')">경제성 분석</button>
-  <button class="tab-btn" onclick="switchTab('flowchart')">구조도</button>
+  <button class="tab-btn active" onclick="switchTab('pipeline', this)">파이프라인 상세</button>
+  <button class="tab-btn" onclick="switchTab('economics', this)">경제성 분석</button>
+  <button class="tab-btn" onclick="switchTab('flowchart', this)">구조도</button>
 </div>
 
 <!-- TAB 1: Pipeline Detail -->
@@ -652,9 +654,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <!-- ============ SECTION 2: IM-PMI IDEATION ============ -->
 <div id="pmi" class="section">
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('skeleton')">Skeleton</button>
-  <button class="tab-btn" onclick="switchTab('deck')">Deck Preview</button>
-  <button class="tab-btn" onclick="switchTab('service-detail')">Service Detail Ideation</button>
+  <button class="tab-btn active" onclick="switchTab('skeleton', this)">Skeleton</button>
+  <button class="tab-btn" onclick="switchTab('deck', this)">Deck Preview</button>
+  <button class="tab-btn" onclick="switchTab('service-detail', this)">Service Detail Ideation</button>
 </div>
 
 <!-- TAB 1: Skeleton -->
@@ -2180,11 +2182,11 @@ Solar + 구조화 DB는 실시간 DB에서 정확한 정보를 검색·요약 �
 </div>
 
 <script>
-function switchSection(sectionId) {
+function switchSection(sectionId, btn) {
   document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.section-btn').forEach(el => el.classList.remove('active'));
   document.getElementById(sectionId).classList.add('active');
-  event.target.classList.add('active');
+  btn.classList.add('active');
 
   // Reset tabs when switching sections
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -2199,12 +2201,12 @@ function switchSection(sectionId) {
   }
 }
 
-function switchTab(id) {
+function switchTab(id, btn) {
   const section = document.querySelector('.section.active');
   section.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   section.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
 </script>
 </body>
